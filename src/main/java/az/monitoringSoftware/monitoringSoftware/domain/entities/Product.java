@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Product")
-public class ProductEntity extends BaseEntity {
+@Table(name = "Products")
+public class Product extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
