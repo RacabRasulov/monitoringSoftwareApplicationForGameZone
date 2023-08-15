@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @Data
 @Builder
@@ -14,12 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "Products")
 public class Product extends BaseEntity {
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Id
-    private Long id;
-    private String productName;
-    private Integer productPrice;
-    private String productExplanation;
+    private String name;
+    private Integer price;
+    private String explanation;
 
 
 }
