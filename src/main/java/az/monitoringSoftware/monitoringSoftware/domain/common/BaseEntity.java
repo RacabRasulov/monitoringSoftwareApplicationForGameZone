@@ -1,6 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.domain.common;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 @Data
 @MappedSuperclass
+
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
