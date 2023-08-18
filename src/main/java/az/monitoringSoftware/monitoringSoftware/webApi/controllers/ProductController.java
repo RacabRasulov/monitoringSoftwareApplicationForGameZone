@@ -2,6 +2,7 @@ package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.ProductManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.CreateProductsRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.products.GetProductsByIdResponse;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductsResponse;
 import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductsRequest;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,6 @@ public class ProductController {
     }
 
     @GetMapping("/getAll")
-    @ResponseStatus(HttpStatus.CREATED)
     public List<GetAllProductsRequest> getAll() {
         return productManager.getAll();
     }
@@ -41,10 +41,9 @@ public class ProductController {
         productManager.update(updateProductsResponse);
     }
 
-    @GetMapping("/getProductById")
-    @ResponseStatus(HttpStatus.OK)
-    public void getProductById(UUID id){
-        productManager.getById(id);
+    @GetMapping("/getById")
+    public GetProductsByIdResponse getById(String id){
+        return productManager.getById(UUID.fromString(id));
     }
 
 }

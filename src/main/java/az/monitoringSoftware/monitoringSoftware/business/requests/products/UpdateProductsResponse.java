@@ -20,7 +20,7 @@ public class UpdateProductsResponse {
     @NotNull(message = "Product name can't be null")
     @Size(min = 2, max = 64, message = "Product name length must be min 2 max 64")
     private String name;
-    private UUID id;
+    private String id;
     private Double price;
     private String explanation;
 

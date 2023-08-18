@@ -17,10 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Table(name = "Products")
 public class Product extends BaseEntity {
-
     private String name;
-    private Integer price;
+    private double price;
     private String explanation;
-    private UUID id;
 
 }
