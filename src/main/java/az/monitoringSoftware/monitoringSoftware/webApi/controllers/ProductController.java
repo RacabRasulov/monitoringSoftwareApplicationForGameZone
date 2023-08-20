@@ -5,6 +5,7 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.products.Creat
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.GetProductsByIdResponse;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductsResponse;
 import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductsRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,9 @@ import java.util.UUID;
 public class ProductController {
     private final ProductManager productManager;
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(CreateProductsRequest createProductsRequest) {
+    public void add(@RequestBody @Valid CreateProductsRequest createProductsRequest) {
         productManager.add(createProductsRequest);
     }
 
@@ -37,7 +38,7 @@ public class ProductController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update(UpdateProductsResponse updateProductsResponse) {
+    public void update(@RequestBody @Valid UpdateProductsResponse updateProductsResponse) {
         productManager.update(updateProductsResponse);
     }
 
