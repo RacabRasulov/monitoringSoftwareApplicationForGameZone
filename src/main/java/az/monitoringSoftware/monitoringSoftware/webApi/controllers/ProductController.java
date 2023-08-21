@@ -30,9 +30,9 @@ public class ProductController {
         return productManager.getAll();
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@RequestParam UUID id) {
+    public void delete(@PathVariable String id) {
         productManager.delete(id);
     }
 

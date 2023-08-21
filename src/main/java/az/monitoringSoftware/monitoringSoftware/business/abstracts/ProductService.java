@@ -12,7 +12,7 @@ public interface ProductService {
     void add(CreateProductsRequest createProductsRequest);
     List<GetAllProductsRequest> getAll();
 
-    void delete(UUID id);
+    void delete(String id);
 
     void update(UpdateProductsResponse updateProductsRequest);
 

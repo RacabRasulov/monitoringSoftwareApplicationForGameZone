@@ -8,6 +8,7 @@ import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetA
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.ProductRepository;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Product;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class ProductManager implements ProductService {
 
     private final ProductRepository productRepository;
@@ -43,8 +45,8 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public void delete(UUID id) {
-        productRepository.deleteById(id);
+    public void delete(String id) {
+        productRepository.deleteById(UUID.fromString(id));
     }
 
     @Override
