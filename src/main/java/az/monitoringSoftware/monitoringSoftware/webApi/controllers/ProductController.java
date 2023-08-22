@@ -5,6 +5,7 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.products.Creat
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.GetProductsByIdResponse;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductsResponse;
 import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductsRequest;
+import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class ProductController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid CreateProductsRequest createProductsRequest) {
+    public void add(@RequestBody @Valid CreateProductsRequest createProductsRequest) throws BusinessException {
         productManager.add(createProductsRequest);
     }
 
@@ -33,7 +34,7 @@ public class ProductController {
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable String id) {
-        productManager.delete(id);
+        productManager.delete(UUID.fromString(id));
     }
 
     @PutMapping("/update")
@@ -43,8 +44,8 @@ public class ProductController {
     }
 
     @GetMapping("/getById")
-    public GetProductsByIdResponse getById(String id){
-        return productManager.getById(UUID.fromString(id));
+    public GetProductsByIdResponse getById(UUID id){
+        return productManager.getById(UUID.fromString(String.valueOf(id)));
     }
 
 }

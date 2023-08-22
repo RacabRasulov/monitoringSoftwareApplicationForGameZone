@@ -1,6 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.business.rules;
 
 public class BusinessException extends Throwable {
-    public BusinessException(String roleAlreadyExists) {
+    public BusinessException(String alreadyExists) {
     }
 }
