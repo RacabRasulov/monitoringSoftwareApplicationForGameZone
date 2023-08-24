@@ -13,7 +13,6 @@ import java.util.UUID;
 public class GetAllDesksRequest {
     private UUID id;
     private String name;
-    private Integer price;
-    private String explanation;
+
 
 }

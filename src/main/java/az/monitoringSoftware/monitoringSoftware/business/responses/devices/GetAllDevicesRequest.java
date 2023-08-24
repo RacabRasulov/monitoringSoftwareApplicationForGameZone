@@ -13,5 +13,5 @@ public class GetAllDevicesRequest {
     private UUID id;
     private String name;
     private Integer price;
-    private String explanation;
+
 }

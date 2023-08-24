@@ -14,15 +14,14 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Desk")
+@Table(name = "Desks")
 public class Desk extends BaseEntity {
 
     private String name;
-    private double price;
-    private String explanation;
+
 
     @OneToMany(mappedBy = "desk",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<Device> products;
+    private Set<Device> device;
 
 
 

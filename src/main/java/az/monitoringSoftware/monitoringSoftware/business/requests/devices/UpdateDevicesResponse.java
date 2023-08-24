@@ -21,5 +21,5 @@ public class UpdateDevicesResponse {
     private String name;
     private UUID id;
     private Double price;
-    private String explanation;
+
 }

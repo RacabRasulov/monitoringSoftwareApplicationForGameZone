@@ -19,6 +19,5 @@ public class UpdateDesksResponse {
     @Size(min = 2, max = 64, message = "Product name length must be min 2 max 64")
     private String name;
     private UUID id;
-    private Double price;
-    private String explanation;
+
 }

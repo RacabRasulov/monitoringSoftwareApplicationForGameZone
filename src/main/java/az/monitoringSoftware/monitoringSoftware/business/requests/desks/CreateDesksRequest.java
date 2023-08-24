@@ -17,6 +17,5 @@ public class CreateDesksRequest {
     @NotEmpty(message = "Device name can't be empty")
     @Size(min=2,max = 64,message = "Device name length must be min 2max 64")
     private String name;
-    private double price;
-    private String explanation;
+
 }
