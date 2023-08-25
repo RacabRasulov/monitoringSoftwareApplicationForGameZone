@@ -9,14 +9,15 @@ import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@RestController
-@RequestMapping("/api/device")
-@AllArgsConstructor
+    @RestController
+    @RequestMapping("/api/device")
+    @AllArgsConstructor
 public class DeviceController {
     private final DeviceManager deviceManager;
 
@@ -45,9 +46,9 @@ public class DeviceController {
     }
 
     @GetMapping("/getById")
-    public GetDevicesByIdResponse getById(UUID id){
+    public ResponseEntity<GetDevicesByIdResponse> getById(String id){
 
-       return deviceManager.getById(id);
+       return ResponseEntity.ok (deviceManager.getById(UUID.fromString(id)));
 
     }
 

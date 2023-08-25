@@ -2,12 +2,14 @@ package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.EmployeeManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.CreatEmployeeRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdResponse;
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeResponse;
 import az.monitoringSoftware.monitoringSoftware.business.responses.employe.GetAllEmployeeRequest;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,8 +42,8 @@ public class EmployeeController {
 
     @GetMapping("/getById")
     @ResponseStatus(HttpStatus.OK)
-    public void getById(UUID id){
-        employeeManager.getById(id);
+    public ResponseEntity<GetEmployeeByIdResponse> getById(String id){
+        return ResponseEntity.ok( employeeManager.getById(UUID.fromString(id)));
     }
 
     @PutMapping("/update")

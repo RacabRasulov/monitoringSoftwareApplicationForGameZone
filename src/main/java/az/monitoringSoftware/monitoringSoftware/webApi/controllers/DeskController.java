@@ -10,6 +10,7 @@ import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,8 +44,8 @@ public class DeskController {
 
     @GetMapping("/getById")
     @ResponseStatus(HttpStatus.OK)
-    public GetDesksByIdReponse getById(UUID id){
-      return   deskManager.getById(id);
+    public ResponseEntity< GetDesksByIdReponse> getById(String id){
+      return  ResponseEntity.ok( deskManager.getById(UUID.fromString(id)));
     }
 
     @PutMapping("/update")
