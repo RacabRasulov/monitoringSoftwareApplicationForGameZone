@@ -1,13 +1,14 @@
 package az.monitoringSoftware.monitoringSoftware.domain.entities;
 
 import az.monitoringSoftware.monitoringSoftware.domain.common.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Data
@@ -20,9 +21,12 @@ public class Desk extends BaseEntity {
     private String name;
 
 
-    @OneToMany(mappedBy = "desk",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<Device> device;
 
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "device_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Device device;
 
 }

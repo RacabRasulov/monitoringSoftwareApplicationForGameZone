@@ -70,7 +70,7 @@ public class ProductManager implements ProductService {
 
     @Override
     public GetProductsByIdResponse getById(UUID id) {
-        Optional<Product> product = productRepository.findById(id);
+        var product = productRepository.findById(UUID.fromString(String.valueOf(id)));
 
 
         return modelMapperManager.forResponse()

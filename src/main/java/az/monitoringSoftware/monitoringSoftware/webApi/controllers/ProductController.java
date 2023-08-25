@@ -9,6 +9,7 @@ import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,13 +40,15 @@ public class ProductController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody @Valid UpdateProductsResponse updateProductsResponse) {
+    public void update( UpdateProductsResponse updateProductsResponse) {
         productManager.update(updateProductsResponse);
     }
 
     @GetMapping("/getById")
-    public GetProductsByIdResponse getById(UUID id){
-        return productManager.getById(UUID.fromString(String.valueOf(id)));
+    public ResponseEntity<GetProductsByIdResponse> getById(String id){
+        return ResponseEntity.ok  (productManager.getById(UUID.fromString(id)));
+
+
     }
 
 }
