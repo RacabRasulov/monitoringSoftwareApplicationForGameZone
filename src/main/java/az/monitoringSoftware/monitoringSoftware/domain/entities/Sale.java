@@ -24,6 +24,8 @@ public class Sale extends BaseEntity {
     private String deskName;
     private UUID deskId;
     private Double devicePrice;
+    private Integer hour;
+    private Integer minutes;
     @OneToMany(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SaleProduct> saleProducts = new ArrayList<>();
 

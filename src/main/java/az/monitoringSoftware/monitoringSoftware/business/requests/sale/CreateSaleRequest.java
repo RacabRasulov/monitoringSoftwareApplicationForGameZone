@@ -15,6 +15,8 @@ import java.util.UUID;
 public class CreateSaleRequest {
     private Timestamp startDate;
     private UUID deskId;
+    private Integer hour;
+    private Integer minutes;
     private List<CreatSaleProductRequest> saleProducts;
 
 }
