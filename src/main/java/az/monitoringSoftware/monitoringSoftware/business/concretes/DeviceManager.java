@@ -1,10 +1,10 @@
 package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.DeviceService;
-import az.monitoringSoftware.monitoringSoftware.business.requests.devices.CreatDevicesRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.devices.GetDevicesByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.devices.UpdateDevicesResponse;
-import az.monitoringSoftware.monitoringSoftware.business.responses.devices.GetAllDevicesRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.device.CreatDeviceRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.device.GetDeviceByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.device.UpdateDeviceRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.devices.GetAllDeviceResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import az.monitoringSoftware.monitoringSoftware.business.rules.DeviceBusinessRules;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
@@ -26,7 +26,7 @@ public class DeviceManager implements DeviceService {
     private final DeviceRepository deviceRepository;
 
     @Override
-    public void add(CreatDevicesRequest creatDeviceRequest) throws BusinessException {
+    public void add(CreatDeviceRequest creatDeviceRequest) throws BusinessException {
         deviceBusinessRules.checkIfDeviceExists(creatDeviceRequest.getName());
         Device device = modelMapperManager.forRequest().
                 map(creatDeviceRequest, Device.class);
@@ -35,12 +35,12 @@ public class DeviceManager implements DeviceService {
     }
 
     @Override
-    public List<GetAllDevicesRequest> getAll() {
+    public List<GetAllDeviceResponse> getAll() {
         List<Device> devices = deviceRepository.findAll();
-        List<GetAllDevicesRequest> devicesList = devices
+        List<GetAllDeviceResponse> devicesList = devices
                 .stream()
                 .map(device -> modelMapperManager.forRequest()
-                        .map(device, GetAllDevicesRequest.class))
+                        .map(device, GetAllDeviceResponse.class))
                 .toList();
         return devicesList;
 
@@ -52,9 +52,9 @@ public class DeviceManager implements DeviceService {
     }
 
     @Override
-    public void update(UpdateDevicesResponse updateDevicesResponse) {
+    public void update(UpdateDeviceRequest updateDeviceRequest) {
 
-        Optional<Device> devices = deviceRepository.findById(UUID.fromString(String.valueOf(updateDevicesResponse.getId())));
+        Optional<Device> devices = deviceRepository.findById(UUID.fromString(String.valueOf(updateDeviceRequest.getId())));
 
 //        if (devices == null) {
 //          throw new NotFoundException(
@@ -62,17 +62,17 @@ public class DeviceManager implements DeviceService {
 //                    ));
         Device device = devices.get();
 
-        modelMapperManager.forRequest().map(updateDevicesResponse, device);
+        modelMapperManager.forRequest().map(updateDeviceRequest, device);
         deviceRepository.save(device);
     }
 
 
     @Override
-    public GetDevicesByIdResponse getById(UUID id) {
+    public GetDeviceByIdRequest getById(UUID id) {
         return modelMapperManager.forResponse()
                 .map(deviceRepository.findById(
                                 UUID.fromString(String.valueOf((id))))
-                        , GetDevicesByIdResponse.class);
+                        , GetDeviceByIdRequest.class);
 
     }
 

@@ -2,9 +2,9 @@ package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.EmployeeService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.CreatEmployeeRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeResponse;
-import az.monitoringSoftware.monitoringSoftware.business.responses.employe.GetAllEmployeeRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.employe.GetAllEmployeeResponse;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.EmployeeRepository;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Employee;
@@ -29,12 +29,12 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public List<GetAllEmployeeRequest> getAll() {
+    public List<GetAllEmployeeResponse> getAll() {
         List<Employee> employees = employeeRepository.findAll();
-        List<GetAllEmployeeRequest> employeeList = employees
+        List<GetAllEmployeeResponse> employeeList = employees
                 .stream()
                 .map(employee -> modelMapperManager.forRequest()
-                        .map(employee, GetAllEmployeeRequest.class))
+                        .map(employee, GetAllEmployeeResponse.class))
                 .toList();
 
         return employeeList;
@@ -42,29 +42,28 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public void delete(UUID id){
+    public void delete(UUID id) {
         employeeRepository.deleteById(id);
     }
 
     @Override
-    public GetEmployeeByIdResponse getById(UUID id){
-         return   modelMapperManager.forResponse().map(employeeRepository.findById(
+    public GetEmployeeByIdRequest getById(UUID id) {
+        return modelMapperManager.forResponse().map(employeeRepository.findById(
                         UUID.fromString(String.valueOf((id))))
-                , GetEmployeeByIdResponse.class);
-
-
+                , GetEmployeeByIdRequest.class);
 
     }
+
     @Override
-    public void update( UpdateEmployeeResponse updateEmployeeResponse) {
-        Optional<Employee> employee = employeeRepository.findById(UUID.fromString(String.valueOf(updateEmployeeResponse.getId())));
+    public void update(UpdateEmployeeRequest updateEmployeeRequest) {
+        Optional<Employee> employee = employeeRepository.findById(UUID.fromString(String.valueOf(updateEmployeeRequest.getId())));
 
 //        if (employee == null)
 //            throw new NotFoundException(messageSource.
 //                    getMessage("product.doesntExists", null, null, null
 //                    ));
         Employee employee1 = employee.get();
-        modelMapperManager.forRequest().map(updateEmployeeResponse, employee1);
+        modelMapperManager.forRequest().map(updateEmployeeRequest, employee1);
         employeeRepository.save(employee1);
     }
 

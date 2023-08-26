@@ -9,9 +9,9 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GetAllDevicesRequest {
+public class GetAllDeviceResponse {
     private UUID id;
     private String name;
-    private Integer price;
+    private Double price;
 
 }

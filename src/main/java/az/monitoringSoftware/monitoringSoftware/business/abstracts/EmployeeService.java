@@ -1,9 +1,9 @@
 package az.monitoringSoftware.monitoringSoftware.business.abstracts;
 
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.CreatEmployeeRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeResponse;
-import az.monitoringSoftware.monitoringSoftware.business.responses.employe.GetAllEmployeeRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.employe.GetAllEmployeeResponse;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,11 +11,11 @@ import java.util.UUID;
 public interface EmployeeService {
     void add(CreatEmployeeRequest creatEmployeeRequest);
 
-    List<GetAllEmployeeRequest> getAll();
+    List<GetAllEmployeeResponse> getAll();
 
     void delete(UUID id);
 
-    GetEmployeeByIdResponse getById(UUID id);
+    GetEmployeeByIdRequest getById(UUID id);
 
-    void update(UpdateEmployeeResponse updateEmployeeResponse);
+    void update(UpdateEmployeeRequest updateEmployeeRequest);
 }

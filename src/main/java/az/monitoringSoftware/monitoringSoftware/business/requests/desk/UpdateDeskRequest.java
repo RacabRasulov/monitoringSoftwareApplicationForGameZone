@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class UpdateDesksResponse {
+public class UpdateDeskRequest {
     @NotNull(message = "Product name can't be null")
     @Size(min = 2, max = 64, message = "Product name length must be min 2 max 64")
     private String name;

@@ -1,4 +1,4 @@
-package az.monitoringSoftware.monitoringSoftware.business.requests.devices;
+package az.monitoringSoftware.monitoringSoftware.business.requests.product;
 
 
 import jakarta.validation.constraints.NotNull;
@@ -10,16 +10,19 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateDevicesResponse {
+public class UpdateProductRequest {
 
     @NotNull(message = "Product name can't be null")
     @Size(min = 2, max = 64, message = "Product name length must be min 2 max 64")
     private String name;
     private UUID id;
     private Double price;
+    private String explanation;
+
 
 }

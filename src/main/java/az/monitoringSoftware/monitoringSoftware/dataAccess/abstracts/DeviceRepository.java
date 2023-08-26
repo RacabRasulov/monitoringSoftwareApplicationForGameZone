@@ -12,5 +12,6 @@ public interface DeviceRepository extends JpaRepository<Device, UUID> {
     void deleteById(UUID id);
 
     boolean existsByName(String name);
+
     Optional<Device> findById(UUID id);
 }

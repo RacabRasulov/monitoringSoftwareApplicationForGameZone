@@ -10,7 +10,7 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GetAllDesksRequest {
+public class GetAllDeskResponse {
     private UUID id;
     private String name;
     private String deviceName;

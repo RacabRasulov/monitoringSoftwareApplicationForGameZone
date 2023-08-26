@@ -1,29 +1,31 @@
 package az.monitoringSoftware.monitoringSoftware.domain.entities;
 
+
 import az.monitoringSoftware.monitoringSoftware.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.UUID;
+
 @Entity
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Desks")
-public class Desk extends BaseEntity {
-
+@Table(name = "salesProduct")
+public class SaleProduct extends BaseEntity {
+    private UUID productId;
     private String name;
-    private Boolean lastUsingStatus;
+    private Double price;
+    private Integer orderCount;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "device_id", nullable = false)
+    @JoinColumn(name = "sales_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
 
-    private Device device;
+    private Sale sale;
 
 }
