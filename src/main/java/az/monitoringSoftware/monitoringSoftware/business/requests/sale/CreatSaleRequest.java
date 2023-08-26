@@ -1,18 +1,19 @@
 package az.monitoringSoftware.monitoringSoftware.business.requests.sale;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class CreatSalesRequest {
+public class CreatSaleRequest {
     private Timestamp startDate;
-    private String deviceName;
-    private UUID deviceId;
-    private String deskName;
     private UUID deskId;
-    private Double devicePrice;
+    private List<CreatSaleRequest> saleProducts;
+
 }
