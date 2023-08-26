@@ -57,7 +57,7 @@ public class SaleManager implements SaleService {
     @Override
     public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
         return modelMapperManager.forResponse()
-                .map(saleRepository.findById(
+                .map(saleRepository.findByDeskId(
                                 UUID.fromString(String.valueOf((id))))
                         , GetSaleByDeskIdRequest.class);
     }
