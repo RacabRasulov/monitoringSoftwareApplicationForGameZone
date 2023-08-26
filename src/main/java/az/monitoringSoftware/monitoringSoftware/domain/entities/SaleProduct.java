@@ -15,7 +15,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "salesProduct")
+@Table(name = "saleProducts")
 public class SaleProduct extends BaseEntity {
     private UUID productId;
     private String name;
