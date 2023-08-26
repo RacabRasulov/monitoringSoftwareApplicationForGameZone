@@ -56,10 +56,6 @@ public class DeviceManager implements DeviceService {
 
         Optional<Device> devices = deviceRepository.findById(UUID.fromString(String.valueOf(updateDeviceRequest.getId())));
 
-//        if (devices == null) {
-//          throw new NotFoundException(
-//                    getMessage("devices.doesntExists", null, null, null
-//                    ));
         Device device = devices.get();
 
         modelMapperManager.forRequest().map(updateDeviceRequest, device);

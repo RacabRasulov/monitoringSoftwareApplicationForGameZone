@@ -58,16 +58,15 @@ public class ProductManager implements ProductService {
     @Override
     public void update(UpdateProductRequest updateProductRequest) {
 
-        Optional<Product> products = productRepository.findById(UUID.fromString(String.valueOf(updateProductRequest.getId())));
+        Optional<Product> product= productRepository.findById(UUID.fromString(String.valueOf(updateProductRequest.getId())));
 
-        if (products == null)
+        if (product == null)
             throw new NotFoundException(messageSource.
                     getMessage("product.doesntExists", null, null, null
                     ));
 
-        Product product = products.get();
-        modelMapperManager.forRequest().map(updateProductRequest, product);
-        productRepository.save(product);
+        modelMapperManager.forRequest().map(updateProductRequest, product.get());
+        productRepository.save(product.get());
     }
 
     @Override

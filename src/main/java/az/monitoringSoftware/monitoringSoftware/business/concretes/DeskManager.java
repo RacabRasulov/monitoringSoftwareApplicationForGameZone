@@ -65,14 +65,9 @@ public class DeskManager implements DeskService {
         Optional<Desk> desk = deskRepository.
                 findById(UUID.fromString(String.valueOf
                         (updateDeskRequest.getId())));
-//        if (products == null)
-//            throw new NotFoundException(messageSource.
-//                    getMessage("product.doesntExists", null, null, null
-//                    ));
 
-        Desk desk1 = desk.get();
-        modelMapperManager.forRequest().map(updateDeskRequest, desk1);
-        deskRepository.save(desk1);
+        modelMapperManager.forRequest().map(updateDeskRequest, desk.get());
+        deskRepository.save(desk.get());
     }
 
 }
