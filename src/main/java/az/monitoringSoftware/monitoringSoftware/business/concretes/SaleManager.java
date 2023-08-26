@@ -2,6 +2,7 @@ package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.SaleService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.SaleRepository;
@@ -38,5 +39,16 @@ public class SaleManager implements SaleService {
         saleRepository.save(sale);
 
     }
+
+    @Override
+    public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
+
+        return modelMapperManager.forResponse()
+                .map(saleRepository.findByDeskId(
+                                UUID.fromString(String.valueOf((id))))
+                        , GetSaleByDeskIdRequest.class);
+
+    }
+
 
 }

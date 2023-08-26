@@ -4,8 +4,12 @@ import az.monitoringSoftware.monitoringSoftware.domain.entities.Sale;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, UUID> {
+
+
+    Optional<Sale> findByDeskId(UUID id);
 }

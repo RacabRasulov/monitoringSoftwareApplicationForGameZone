@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
