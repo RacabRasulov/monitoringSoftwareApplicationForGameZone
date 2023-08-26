@@ -2,6 +2,7 @@ package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.SaleService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -52,6 +52,14 @@ public class SaleManager implements SaleService {
         }
         saleRepository.save(sale);
 
+    }
+
+    @Override
+    public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
+        return modelMapperManager.forResponse()
+                .map(saleRepository.findById(
+                                UUID.fromString(String.valueOf((id))))
+                        , GetSaleByDeskIdRequest.class);
     }
 
 }
