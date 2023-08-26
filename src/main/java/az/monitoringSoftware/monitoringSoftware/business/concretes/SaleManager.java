@@ -1,7 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.SaleService;
-import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreatSaleRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.SaleRepository;
@@ -22,13 +22,13 @@ public class SaleManager implements SaleService {
 
 
     @Override
-    public void add(CreatSaleRequest creatSaleRequest) {
+    public void add(CreateSaleRequest createSaleRequest) {
         Optional<Desk> desk = deskRepository.findById(UUID.fromString(String
-                .valueOf(creatSaleRequest.getDeskId())));
+                .valueOf(createSaleRequest.getDeskId())));
 
 
         Sale sale = modelMapperManager.forRequest()
-                .map(creatSaleRequest, Sale.class);
+                .map(createSaleRequest, Sale.class);
 
         sale.setDeskName(desk.get().getName());
         sale.setDeviceId(desk.get().getDevice().getId());

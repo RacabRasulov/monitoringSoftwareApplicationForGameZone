@@ -1,7 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.SaleManager;
-import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreatSaleRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,8 +14,8 @@ public class SaleController {
     private final SaleManager saleManager;
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add( @RequestBody @Valid CreatSaleRequest creatSaleRequest){
-        saleManager.add(creatSaleRequest);
+    public void add( @RequestBody @Valid CreateSaleRequest createSaleRequest){
+        saleManager.add(createSaleRequest);
     }
 
 

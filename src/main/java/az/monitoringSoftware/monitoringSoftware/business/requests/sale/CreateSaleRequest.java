@@ -1,5 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.business.requests.sale;
 
+import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +12,9 @@ import java.util.UUID;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class CreatSaleRequest {
+public class CreateSaleRequest {
     private Timestamp startDate;
     private UUID deskId;
-    private List<CreatSaleRequest> saleProducts;
+    private List<CreatSaleProductRequest> saleProducts;
 
 }
