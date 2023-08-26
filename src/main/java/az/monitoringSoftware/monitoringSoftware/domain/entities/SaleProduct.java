@@ -23,9 +23,8 @@ public class SaleProduct extends BaseEntity {
     private Integer orderCount;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "sales_id", nullable = false)
+    @JoinColumn(name = "sale_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-
     private Sale sale;
 
 }

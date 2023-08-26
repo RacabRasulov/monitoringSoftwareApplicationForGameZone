@@ -23,7 +23,6 @@ public class Desk extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "device_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-
     private Device device;
 
 }

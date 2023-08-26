@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,6 +25,6 @@ public class Sale extends BaseEntity {
     private UUID deskId;
     private Double devicePrice;
     @OneToMany(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SaleProduct> saleProducts;
+    private List<SaleProduct> saleProducts = new ArrayList<>();
 
 }
