@@ -1,7 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.business.abstracts;
 
-import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreatSaleRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 
 public interface SaleService {
-    void add(CreatSaleRequest creatSaleRequest);
+    void add(CreateSaleRequest createSaleRequest);
 }
