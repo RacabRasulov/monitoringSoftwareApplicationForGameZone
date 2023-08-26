@@ -2,9 +2,9 @@ package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.EmployeeManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.CreatEmployeeRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeResponse;
-import az.monitoringSoftware.monitoringSoftware.business.responses.employe.GetAllEmployeeRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.employe.GetAllEmployeeResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,6 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class EmployeeController {
     public final EmployeeManager employeeManager;
+
     @PutMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid CreatEmployeeRequest creatEmployeeRequest) throws BusinessException {
@@ -29,27 +30,27 @@ public class EmployeeController {
 
     @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.OK)
-    public List<GetAllEmployeeRequest> getAll(){
-     return employeeManager.getAll();
+    public List<GetAllEmployeeResponse> getAll() {
+        return employeeManager.getAll();
     }
 
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable UUID id){
+    public void delete(@PathVariable UUID id) {
         employeeManager.delete(id);
     }
 
     @GetMapping("/getById")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<GetEmployeeByIdResponse> getById(String id){
-        return ResponseEntity.ok( employeeManager.getById(UUID.fromString(id)));
+    public ResponseEntity<GetEmployeeByIdRequest> getById(String id) {
+        return ResponseEntity.ok(employeeManager.getById(UUID.fromString(id)));
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody  UpdateEmployeeResponse updateEmployeeResponse){
-        employeeManager.update(updateEmployeeResponse);
+    public void update(@RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
+        employeeManager.update(updateEmployeeRequest);
     }
 
 }

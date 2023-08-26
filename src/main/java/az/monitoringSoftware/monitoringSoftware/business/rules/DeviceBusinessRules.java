@@ -10,9 +10,9 @@ public class DeviceBusinessRules {
 
     private final DeviceRepository deviceRepository;
 
-    public void checkIfDeviceExists(String name) throws BusinessException{
+    public void checkIfDeviceExists(String name) throws BusinessException {
 
-        if(deviceRepository.existsByName( name))
+        if (deviceRepository.existsByName(name))
             throw new BusinessException("Device already exists");
     }
 }

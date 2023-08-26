@@ -22,6 +22,6 @@ public class Device extends BaseEntity {
     private double price;
     private UUID id;
 
-    @OneToMany(mappedBy = "device",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-     private Set<Desk> desk;
+    @OneToMany(mappedBy = "device", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Desk> desk;
 }

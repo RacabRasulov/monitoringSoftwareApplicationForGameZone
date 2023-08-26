@@ -1,4 +1,4 @@
-package az.monitoringSoftware.monitoringSoftware.business.responses.products;
+package az.monitoringSoftware.monitoringSoftware.business.responses.devices;
 
 import lombok.*;
 
@@ -9,10 +9,9 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GetAllProductsRequest {
+public class GetAllDeviceResponse {
     private UUID id;
     private String name;
     private Double price;
-    private String explanation;
 
 }

@@ -1,10 +1,10 @@
 package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.ProductService;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.CreateProductsRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.GetProductsByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductRequest;
-import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductsRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.product.CreateProductRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.product.GetProductByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.product.UpdateProductRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import az.monitoringSoftware.monitoringSoftware.business.rules.ProductBusinessRules;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
@@ -29,20 +29,20 @@ public class ProductManager implements ProductService {
     private final ProductBusinessRules productBusinessRules;
 
     @Override
-    public void add(CreateProductsRequest createProductsRequest) throws BusinessException {
-        productBusinessRules.checkIfProductExists(createProductsRequest.getName());
+    public void add(CreateProductRequest createProductRequest) throws BusinessException {
+        productBusinessRules.checkIfProductExists(createProductRequest.getName());
         Product product = modelMapperManager.forRequest()
-                .map(createProductsRequest, Product.class);
+                .map(createProductRequest, Product.class);
         productRepository.save(product);
     }
 
     @Override
-    public List<GetAllProductsRequest> getAll() {
+    public List<GetAllProductResponse> getAll() {
         List<Product> products = productRepository.findAll();
-        List<GetAllProductsRequest> productsList = products
+        List<GetAllProductResponse> productsList = products
                 .stream()
                 .map(product -> modelMapperManager.forRequest()
-                        .map(product, GetAllProductsRequest.class))
+                        .map(product, GetAllProductResponse.class))
                 .toList();
 
         return productsList;
@@ -56,7 +56,7 @@ public class ProductManager implements ProductService {
 
 
     @Override
-    public void update( UpdateProductRequest updateProductRequest) {
+    public void update(UpdateProductRequest updateProductRequest) {
 
         Optional<Product> products = productRepository.findById(UUID.fromString(String.valueOf(updateProductRequest.getId())));
 
@@ -71,12 +71,12 @@ public class ProductManager implements ProductService {
     }
 
     @Override
-    public GetProductsByIdResponse getById(UUID id) {
+    public GetProductByIdRequest getById(UUID id) {
 
-               return modelMapperManager.forResponse()
+        return modelMapperManager.forResponse()
                 .map(productRepository.findById(
                                 UUID.fromString(String.valueOf((id))))
-                        , GetProductsByIdResponse.class);
+                        , GetProductByIdRequest.class);
     }
 
 

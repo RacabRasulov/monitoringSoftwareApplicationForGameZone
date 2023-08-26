@@ -1,9 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.domain.common;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

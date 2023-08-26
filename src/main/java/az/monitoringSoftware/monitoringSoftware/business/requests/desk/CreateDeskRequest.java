@@ -12,10 +12,10 @@ import lombok.*;
 @RequiredArgsConstructor
 @AllArgsConstructor
 
-public class CreateDesksRequest {
+public class CreateDeskRequest {
     @NotNull(message = "Desk name can't be null")
     @NotEmpty(message = "Desk name can't be empty")
-    @Size(min=2,max = 64,message = "Device name length must be min 2max 64")
+    @Size(min = 2, max = 64, message = "Device name length must be min 2max 64")
     private String name;
 
     @NotNull(message = "Device can't be null")

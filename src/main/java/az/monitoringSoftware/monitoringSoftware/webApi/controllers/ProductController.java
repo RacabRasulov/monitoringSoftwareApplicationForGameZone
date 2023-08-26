@@ -1,10 +1,10 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.ProductManager;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.CreateProductsRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.GetProductsByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductRequest;
-import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductsRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.product.CreateProductRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.product.GetProductByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.product.UpdateProductRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -23,12 +23,12 @@ public class ProductController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid CreateProductsRequest createProductsRequest) throws BusinessException {
-        productManager.add(createProductsRequest);
+    public void add(@RequestBody @Valid CreateProductRequest createProductRequest) throws BusinessException {
+        productManager.add(createProductRequest);
     }
 
     @GetMapping("/getAll")
-    public List<GetAllProductsRequest> getAll() {
+    public List<GetAllProductResponse> getAll() {
         return productManager.getAll();
     }
 
@@ -40,13 +40,13 @@ public class ProductController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update(  @RequestBody UpdateProductRequest updateProductRequest) {
-        productManager.update( updateProductRequest);
+    public void update(@RequestBody UpdateProductRequest updateProductRequest) {
+        productManager.update(updateProductRequest);
     }
 
     @GetMapping("/getById")
-    public ResponseEntity<GetProductsByIdResponse> getById(String id){
-        return ResponseEntity.ok  (productManager.getById(UUID.fromString(id)));
+    public ResponseEntity<GetProductByIdRequest> getById(String id) {
+        return ResponseEntity.ok(productManager.getById(UUID.fromString(id)));
 
 
     }

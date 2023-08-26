@@ -1,10 +1,10 @@
 package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.DeskService;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDesksRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskByIdRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDesksResponse;
-import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDesksRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDeskResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import az.monitoringSoftware.monitoringSoftware.business.rules.DeskBusinessRules;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
@@ -25,7 +25,7 @@ public class DeskManager implements DeskService {
     public final ModelMapperManager modelMapperManager;
 
     @Override
-    public void add(CreateDesksRequest createDeskRequest) throws BusinessException {
+    public void add(CreateDeskRequest createDeskRequest) throws BusinessException {
         deskBusinessRules.checkIfDeskExists(createDeskRequest.getName());
 
 
@@ -35,11 +35,11 @@ public class DeskManager implements DeskService {
 
 
     @Override
-    public List<GetAllDesksRequest> getAll() {
+    public List<GetAllDeskResponse> getAll() {
         List<Desk> desks = deskRepository.findAll();
-        List<GetAllDesksRequest> deskList = desks.stream()
+        List<GetAllDeskResponse> deskList = desks.stream()
                 .map(desk -> modelMapperManager.forResponse()
-                        .map(desk, GetAllDesksRequest.class))
+                        .map(desk, GetAllDeskResponse.class))
                 .toList();
 
         return deskList;
@@ -60,18 +60,18 @@ public class DeskManager implements DeskService {
     }
 
     @Override
-    public void update(UpdateDesksResponse updateDesksResponse) {
+    public void update(UpdateDeskRequest updateDeskRequest) {
 
         Optional<Desk> desk = deskRepository.
                 findById(UUID.fromString(String.valueOf
-                        (updateDesksResponse.getId())));
+                        (updateDeskRequest.getId())));
 //        if (products == null)
 //            throw new NotFoundException(messageSource.
 //                    getMessage("product.doesntExists", null, null, null
 //                    ));
 
         Desk desk1 = desk.get();
-        modelMapperManager.forRequest().map(updateDesksResponse, desk1);
+        modelMapperManager.forRequest().map(updateDeskRequest, desk1);
         deskRepository.save(desk1);
     }
 

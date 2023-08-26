@@ -11,5 +11,6 @@ import java.util.UUID;
 public interface DeskRepository extends JpaRepository<Desk, UUID> {
 
     boolean existsByName(String name);
+
     Optional<Desk> findById(UUID id);
 }

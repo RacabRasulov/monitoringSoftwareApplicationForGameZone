@@ -2,10 +2,10 @@ package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.DeskManager;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDesksRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskByIdRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDesksResponse;
-import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDesksRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDeskResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -24,34 +24,34 @@ public class DeskController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid CreateDesksRequest createDeskRequest) throws BusinessException {
+    public void add(@RequestBody @Valid CreateDeskRequest createDeskRequest) throws BusinessException {
         deskManager.add(createDeskRequest);
     }
 
 
     @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.OK)
-    public List<GetAllDesksRequest> getAll() {
+    public List<GetAllDeskResponse> getAll() {
         return deskManager.getAll();
 
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable  UUID id){
+    public void delete(@PathVariable UUID id) {
         deskManager.delete(id);
     }
 
     @GetMapping("/getById")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<GetDeskByIdRequest> getById(String id){
-      return  ResponseEntity.ok( deskManager.getById(UUID.fromString(id)));
+    public ResponseEntity<GetDeskByIdRequest> getById(String id) {
+        return ResponseEntity.ok(deskManager.getById(UUID.fromString(id)));
     }
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody @Valid UpdateDesksResponse updateDesksResponse) {
-        deskManager.update(updateDesksResponse);
+    public void update(@RequestBody @Valid UpdateDeskRequest updateDeskRequest) {
+        deskManager.update(updateDeskRequest);
     }
 
 }

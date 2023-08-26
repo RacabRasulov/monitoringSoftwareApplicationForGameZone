@@ -1,10 +1,10 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.DeviceManager;
-import az.monitoringSoftware.monitoringSoftware.business.requests.devices.CreatDevicesRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.devices.GetDevicesByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.devices.UpdateDevicesResponse;
-import az.monitoringSoftware.monitoringSoftware.business.responses.devices.GetAllDevicesRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.device.CreatDeviceRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.device.GetDeviceByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.device.UpdateDeviceRequest;
+import az.monitoringSoftware.monitoringSoftware.business.responses.devices.GetAllDeviceResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -15,40 +15,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-    @RestController
-    @RequestMapping("/api/device")
-    @AllArgsConstructor
+@RestController
+@RequestMapping("/api/device")
+@AllArgsConstructor
 public class DeviceController {
     private final DeviceManager deviceManager;
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.OK)
-    public void add(@RequestBody @Valid CreatDevicesRequest creatDeviceRequest) throws BusinessException {
+    public void add(@RequestBody @Valid CreatDeviceRequest creatDeviceRequest) throws BusinessException {
         deviceManager.add(creatDeviceRequest);
     }
 
 
     @GetMapping("/getAll")
-    public List<GetAllDevicesRequest> getAll() {
+    public List<GetAllDeviceResponse> getAll() {
         return deviceManager.getAll();
     }
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable UUID id){
+    public void delete(@PathVariable UUID id) {
         deviceManager.delete(id);
     }
 
     @PostMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update( @RequestBody @Valid UpdateDevicesResponse updateDevicesResponse){
-        deviceManager.update(updateDevicesResponse);
+    public void update(@RequestBody @Valid UpdateDeviceRequest updateDeviceRequest) {
+        deviceManager.update(updateDeviceRequest);
     }
 
     @GetMapping("/getById")
-    public ResponseEntity<GetDevicesByIdResponse> getById(String id){
+    public ResponseEntity<GetDeviceByIdRequest> getById(String id) {
 
-       return ResponseEntity.ok (deviceManager.getById(UUID.fromString(id)));
+        return ResponseEntity.ok(deviceManager.getById(UUID.fromString(id)));
 
     }
 
