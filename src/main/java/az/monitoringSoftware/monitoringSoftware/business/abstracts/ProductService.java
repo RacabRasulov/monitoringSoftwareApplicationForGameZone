@@ -2,7 +2,7 @@ package az.monitoringSoftware.monitoringSoftware.business.abstracts;
 
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.CreateProductsRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.GetProductsByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductsResponse;
+import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductsRequest;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 
@@ -16,7 +16,9 @@ public interface ProductService {
 
     void delete(UUID id);
 
-    void update(UpdateProductsResponse updateProductsRequest);
+
+
+    void update( UpdateProductRequest updateProductRequest);
 
     GetProductsByIdResponse getById(UUID id);
 }

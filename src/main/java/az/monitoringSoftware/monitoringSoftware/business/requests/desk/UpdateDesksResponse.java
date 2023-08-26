@@ -1,4 +1,4 @@
-package az.monitoringSoftware.monitoringSoftware.business.requests.desks;
+package az.monitoringSoftware.monitoringSoftware.business.requests.desk;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,11 +13,11 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetDesksByIdReponse {
 
+public class UpdateDesksResponse {
     @NotNull(message = "Product name can't be null")
     @Size(min = 2, max = 64, message = "Product name length must be min 2 max 64")
     private String name;
     private UUID id;
-
+    private Boolean lastUsingStatus;
 }

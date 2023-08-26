@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,6 +24,7 @@ public class GetEmployeeByIdResponse {
     @NotEmpty(message = "Employe surname can't be empty")
     @Size(min = 2,max = 64,message = "Employe surname length must be min 2 max 64")
     private String surname;
+    private UUID id;
     private Integer contactNumber;
     private String passportSeries;
     private Integer passportNumber;

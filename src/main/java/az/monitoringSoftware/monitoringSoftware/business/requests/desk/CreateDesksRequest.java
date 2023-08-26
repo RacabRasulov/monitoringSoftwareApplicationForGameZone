@@ -1,4 +1,4 @@
-package az.monitoringSoftware.monitoringSoftware.business.requests.desks;
+package az.monitoringSoftware.monitoringSoftware.business.requests.desk;
 
 
 import jakarta.validation.constraints.NotEmpty;
@@ -13,9 +13,13 @@ import lombok.*;
 @AllArgsConstructor
 
 public class CreateDesksRequest {
-    @NotNull(message = "Device name can't be null")
-    @NotEmpty(message = "Device name can't be empty")
+    @NotNull(message = "Desk name can't be null")
+    @NotEmpty(message = "Desk name can't be empty")
     @Size(min=2,max = 64,message = "Device name length must be min 2max 64")
     private String name;
+
+    @NotNull(message = "Device can't be null")
+    @NotEmpty(message = "Device can't be empty")
+    private String deviceId;
 
 }

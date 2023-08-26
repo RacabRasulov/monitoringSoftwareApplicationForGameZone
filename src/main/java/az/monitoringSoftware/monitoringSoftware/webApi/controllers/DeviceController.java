@@ -33,7 +33,7 @@ public class DeviceController {
         return deviceManager.getAll();
     }
 
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable UUID id){
         deviceManager.delete(id);
@@ -41,7 +41,7 @@ public class DeviceController {
 
     @PostMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody @Valid UpdateDevicesResponse updateDevicesResponse){
+    public void update( @RequestBody @Valid UpdateDevicesResponse updateDevicesResponse){
         deviceManager.update(updateDevicesResponse);
     }
 

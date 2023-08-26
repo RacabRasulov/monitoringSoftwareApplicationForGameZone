@@ -34,7 +34,7 @@ public class EmployeeController {
     }
 
 
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable UUID id){
         employeeManager.delete(id);
@@ -48,7 +48,7 @@ public class EmployeeController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody @Valid UpdateEmployeeResponse updateEmployeeResponse){
+    public void update(@RequestBody  UpdateEmployeeResponse updateEmployeeResponse){
         employeeManager.update(updateEmployeeResponse);
     }
 

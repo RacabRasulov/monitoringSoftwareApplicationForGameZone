@@ -17,7 +17,7 @@ public interface DeviceService {
 
     void delete(UUID id);
 
-    void update(UpdateDevicesResponse updateDevicesResponse);
+    void update( UpdateDevicesResponse updateDevicesResponse);
 
 
     GetDevicesByIdResponse getById(UUID id);

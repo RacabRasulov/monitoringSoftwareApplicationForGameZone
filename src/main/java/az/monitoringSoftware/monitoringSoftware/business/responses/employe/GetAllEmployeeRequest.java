@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @ToString
@@ -20,6 +22,7 @@ public class GetAllEmployeeRequest {
     @NotEmpty(message = "Employe surname can't be empty")
     @Size(min = 2,max = 64,message = "Employe surname length must be min 2 max 64")
     private String surname;
+    private UUID id;
     private Integer contactNumber;
     private String passportSeries;
     private Integer passportNumber;

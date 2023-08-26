@@ -2,9 +2,9 @@ package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.DeskManager;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desks.CreateDesksRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desks.GetDesksByIdReponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desks.UpdateDesksResponse;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDesksRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDesksResponse;
 import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDesksRequest;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import jakarta.validation.Valid;
@@ -36,7 +36,7 @@ public class DeskController {
 
     }
 
-    @DeleteMapping("/delete{id}")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable  UUID id){
         deskManager.delete(id);
@@ -44,7 +44,7 @@ public class DeskController {
 
     @GetMapping("/getById")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity< GetDesksByIdReponse> getById(String id){
+    public ResponseEntity<GetDeskByIdRequest> getById(String id){
       return  ResponseEntity.ok( deskManager.getById(UUID.fromString(id)));
     }
 

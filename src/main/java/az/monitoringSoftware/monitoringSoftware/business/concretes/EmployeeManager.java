@@ -48,8 +48,7 @@ public class EmployeeManager implements EmployeeService {
 
     @Override
     public GetEmployeeByIdResponse getById(UUID id){
-        Optional<Employee> employees=employeeRepository.findById(id);
-      return   modelMapperManager.forResponse().map(employeeRepository.findById(
+         return   modelMapperManager.forResponse().map(employeeRepository.findById(
                         UUID.fromString(String.valueOf((id))))
                 , GetEmployeeByIdResponse.class);
 
@@ -57,17 +56,16 @@ public class EmployeeManager implements EmployeeService {
 
     }
     @Override
-    public void update(UpdateEmployeeResponse updateEmployeeResponse) {
+    public void update( UpdateEmployeeResponse updateEmployeeResponse) {
+        Optional<Employee> employee = employeeRepository.findById(UUID.fromString(String.valueOf(updateEmployeeResponse.getId())));
 
-        Optional<Employee> employee = employeeRepository.
-                findById(UUID.fromString(String.valueOf
-                        (updateEmployeeResponse.getName())));
 //        if (employee == null)
 //            throw new NotFoundException(messageSource.
 //                    getMessage("product.doesntExists", null, null, null
 //                    ));
-
-        modelMapperManager.forRequest().map(updateEmployeeResponse, employee.get());
+        Employee employee1 = employee.get();
+        modelMapperManager.forRequest().map(updateEmployeeResponse, employee1);
+        employeeRepository.save(employee1);
     }
 
 }

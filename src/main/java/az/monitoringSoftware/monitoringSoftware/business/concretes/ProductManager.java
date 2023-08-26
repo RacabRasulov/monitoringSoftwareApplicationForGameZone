@@ -3,7 +3,7 @@ package az.monitoringSoftware.monitoringSoftware.business.concretes;
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.ProductService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.CreateProductsRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.GetProductsByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductsResponse;
+import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductsRequest;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import az.monitoringSoftware.monitoringSoftware.business.rules.ProductBusinessRules;
@@ -54,32 +54,30 @@ public class ProductManager implements ProductService {
         productRepository.deleteById(id);
     }
 
-    @Override
-    public void update(UpdateProductsResponse updateProductsResponse) {
 
-        Optional<Product> products = productRepository.
-                findById(UUID.fromString(String.valueOf
-                        (updateProductsResponse.getId())));
+    @Override
+    public void update( UpdateProductRequest updateProductRequest) {
+
+        Optional<Product> products = productRepository.findById(UUID.fromString(String.valueOf(updateProductRequest.getId())));
+
         if (products == null)
             throw new NotFoundException(messageSource.
                     getMessage("product.doesntExists", null, null, null
                     ));
 
-        modelMapperManager.forRequest().map(updateProductsResponse, products.get());
+        Product product = products.get();
+        modelMapperManager.forRequest().map(updateProductRequest, product);
+        productRepository.save(product);
     }
 
     @Override
     public GetProductsByIdResponse getById(UUID id) {
-        var product = productRepository.findById(UUID.fromString(String.valueOf(id)));
 
-
-        return modelMapperManager.forResponse()
+               return modelMapperManager.forResponse()
                 .map(productRepository.findById(
                                 UUID.fromString(String.valueOf((id))))
                         , GetProductsByIdResponse.class);
     }
-
-
 
 
 }

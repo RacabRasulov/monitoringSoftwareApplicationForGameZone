@@ -13,6 +13,9 @@ import java.util.UUID;
 public class GetAllDesksRequest {
     private UUID id;
     private String name;
-
+    private String deviceName;
+    private String deviceId;
+    private Double devicePrice;
+    private Boolean lastUsingStatus;
 
 }

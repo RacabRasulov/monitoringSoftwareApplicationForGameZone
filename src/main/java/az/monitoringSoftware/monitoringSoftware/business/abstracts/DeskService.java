@@ -1,8 +1,8 @@
 package az.monitoringSoftware.monitoringSoftware.business.abstracts;
 
-import az.monitoringSoftware.monitoringSoftware.business.requests.desks.CreateDesksRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desks.GetDesksByIdReponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.desks.UpdateDesksResponse;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDesksRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDesksResponse;
 import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDesksRequest;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 
@@ -17,7 +17,7 @@ public interface DeskService {
 
     void delete(UUID id);
 
-    GetDesksByIdReponse getById(UUID id);
+    GetDeskByIdRequest getById(UUID id);
 
     void update(UpdateDesksResponse updateDesksResponse);
 }

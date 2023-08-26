@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -19,10 +20,8 @@ import java.util.Set;
 public class Device extends BaseEntity {
     private String name;
     private double price;
-
-
-
+    private UUID id;
 
     @OneToMany(mappedBy = "device",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private Set<Desk> desk;
+     private Set<Desk> desk;
 }

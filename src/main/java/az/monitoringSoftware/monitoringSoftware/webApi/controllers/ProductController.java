@@ -3,7 +3,7 @@ package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 import az.monitoringSoftware.monitoringSoftware.business.concretes.ProductManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.CreateProductsRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.products.GetProductsByIdResponse;
-import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductsResponse;
+import az.monitoringSoftware.monitoringSoftware.business.requests.products.UpdateProductRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.products.GetAllProductsRequest;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
 import jakarta.validation.Valid;
@@ -32,7 +32,7 @@ public class ProductController {
         return productManager.getAll();
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable String id) {
         productManager.delete(UUID.fromString(id));
@@ -40,8 +40,8 @@ public class ProductController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
-    public void update( UpdateProductsResponse updateProductsResponse) {
-        productManager.update(updateProductsResponse);
+    public void update(  @RequestBody UpdateProductRequest updateProductRequest) {
+        productManager.update( updateProductRequest);
     }
 
     @GetMapping("/getById")
