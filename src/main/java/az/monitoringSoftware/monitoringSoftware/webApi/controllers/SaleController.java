@@ -29,10 +29,4 @@ public class SaleController {
     public ResponseEntity<GetSaleByDeskIdRequest> getSaleByDeskIdRequest(@PathVariable String id){
        return ResponseEntity.ok( saleManager.getSaleByDeskIdRequest(UUID.fromString(id)));
     }
-    @GetMapping("/getSaleIdEqualsRequest/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<GetSaleIdEqualsRequestId> getSaleIdEqualsRequestIdResponseEntity(@PathVariable String id){
-        return ResponseEntity.ok( saleManager.getSaleIdEqualsRequestId(UUID.fromString(id)));
-    }
-
 }
