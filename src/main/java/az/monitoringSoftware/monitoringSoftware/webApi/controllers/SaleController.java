@@ -30,7 +30,7 @@ public class SaleController {
        return ResponseEntity.ok( saleManager.getSaleByDeskIdRequest(UUID.fromString(id)));
     }
 
-    @GetMapping("/endSale/{id}")
+    @PostMapping("/endSale")
     @ResponseStatus(HttpStatus.OK)
     public void endSale(@RequestBody @Valid EndSaleRequest endSaleRequest) {
         saleManager.endSaleRequest(endSaleRequest);

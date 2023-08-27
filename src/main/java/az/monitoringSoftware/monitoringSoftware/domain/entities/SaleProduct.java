@@ -21,6 +21,9 @@ public class SaleProduct extends BaseEntity {
     private Double price;
     private Integer orderCount;
 
+    private double cost;
+    private String nameOfSeller;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "sale_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

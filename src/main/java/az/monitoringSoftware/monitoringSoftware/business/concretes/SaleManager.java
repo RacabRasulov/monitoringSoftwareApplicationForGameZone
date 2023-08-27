@@ -74,7 +74,11 @@ public class SaleManager implements SaleService {
     public void endSaleRequest(EndSaleRequest endSaleRequest) {
 
         Sale sale = saleRepository.findByDeskId(endSaleRequest.getDeskId());
-        modelMapperManager.forRequest().map(endSaleRequest,sale);
+        sale.setTotalAmount(endSaleRequest.getTotalAmount());
+        sale.setEndDate(endSaleRequest.getEndDate());
+        sale.setTotalGameAmount(endSaleRequest.getTotalGameAmount());
+        sale.setTotalProductAmount(endSaleRequest.getTotalProductAmount());
+        sale.setIsSaleEnded(endSaleRequest.getIsSaleEnded());
         saleRepository.save(sale);
 
     }

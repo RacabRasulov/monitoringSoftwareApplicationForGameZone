@@ -15,4 +15,6 @@ public class CreatSaleProductRequest {
     private String name;
     private Double price;
     private Integer orderCount;
+    private double cost;
+    private String nameOfSeller;
 }

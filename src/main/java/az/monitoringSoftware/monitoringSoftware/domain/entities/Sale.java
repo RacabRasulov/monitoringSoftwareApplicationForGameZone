@@ -18,6 +18,7 @@ import java.util.UUID;
 @Table(name = "sales")
 public class Sale extends BaseEntity {
     private Timestamp startDate;
+    private Timestamp endDate;
     private String deviceName;
     private UUID deviceId;
     private String deskName;
@@ -26,7 +27,6 @@ public class Sale extends BaseEntity {
     private Integer hour;
     private Integer minutes;
     private Boolean isDefaultTimeChecked;
-    private Integer totalMinutes;
     private Double totalProductAmount;
     private Double totalGameAmount;
     private Double totalAmount;

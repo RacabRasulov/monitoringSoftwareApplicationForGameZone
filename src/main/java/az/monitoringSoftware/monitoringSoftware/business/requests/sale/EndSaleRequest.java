@@ -2,6 +2,7 @@ package az.monitoringSoftware.monitoringSoftware.business.requests.sale;
 
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Data
@@ -16,6 +17,6 @@ public class EndSaleRequest {
     private Double totalGameAmount;
     private Double totalAmount;
     private Boolean isSaleEnded;
-
+    private Timestamp endDate;
 
 }
