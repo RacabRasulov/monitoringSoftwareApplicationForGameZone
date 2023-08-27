@@ -3,10 +3,10 @@ package az.monitoringSoftware.monitoringSoftware.business.concretes;
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.SaleService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleIdEqualsRequestId;
 import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;
-import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.ProductRepository;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.SaleRepository;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Desk;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Sale;
@@ -32,7 +32,7 @@ public class SaleManager implements SaleService {
 
         Sale sale = new Sale();
 
-        for(CreatSaleProductRequest createSaleProduct : createSaleRequest.getSaleProducts()){
+        for (CreatSaleProductRequest createSaleProduct : createSaleRequest.getSaleProducts()) {
             SaleProduct saleProduct = new SaleProduct();
             saleProduct.setProductId(createSaleProduct.getProductId());
             saleProduct.setName(createSaleProduct.getName());
@@ -50,7 +50,7 @@ public class SaleManager implements SaleService {
         sale.setDeviceId(desk.get().getDevice().getId());
         sale.setDeviceName(desk.get().getDevice().getName());
         sale.setDevicePrice(desk.get().getDevice().getPrice());
-        for(SaleProduct product : sale.getSaleProducts()){
+        for (SaleProduct product : sale.getSaleProducts()) {
             product.setSale(sale);
         }
         saleRepository.save(sale);
@@ -62,12 +62,28 @@ public class SaleManager implements SaleService {
 
         var saleDetails = saleRepository.findByDeskId(id);
 
-        if(saleDetails == null)
+        if (saleDetails == null)
             return null;
-        else{
+        else {
             return modelMapperManager.forResponse()
                     .map(saleDetails, GetSaleByDeskIdRequest.class);
         }
+
+
+    }
+
+    @Override
+    public GetSaleIdEqualsRequestId getSaleIdEqualsRequestId(UUID id) {
+        Optional<Sale> saleOptional =saleRepository.findByIsSaleEndedIsFalseAndDeskId(id);
+
+        if (saleOptional == null)
+            return null;
+
+          return   modelMapperManager.forResponse()
+                    .map(saleOptional,GetSaleIdEqualsRequestId.class);
+
+
     }
 
 }
+

@@ -3,6 +3,7 @@ package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 import az.monitoringSoftware.monitoringSoftware.business.concretes.SaleManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleIdEqualsRequestId;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,4 +29,10 @@ public class SaleController {
     public ResponseEntity<GetSaleByDeskIdRequest> getSaleByDeskIdRequest(@PathVariable String id){
        return ResponseEntity.ok( saleManager.getSaleByDeskIdRequest(UUID.fromString(id)));
     }
+    @GetMapping("/getSaleIdEqualsRequest/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<GetSaleIdEqualsRequestId> getSaleIdEqualsRequestIdResponseEntity(@PathVariable String id){
+        return ResponseEntity.ok( saleManager.getSaleIdEqualsRequestId(UUID.fromString(id)));
+    }
+
 }
