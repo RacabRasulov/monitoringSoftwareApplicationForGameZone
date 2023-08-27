@@ -23,7 +23,6 @@ public class SaleManager implements SaleService {
     private final SaleRepository saleRepository;
     private final ModelMapperManager modelMapperManager;
     private final DeskRepository deskRepository;
-    private final ProductRepository productRepository;
 
 
     @Override
@@ -42,6 +41,10 @@ public class SaleManager implements SaleService {
             sale.getSaleProducts().add(saleProduct);
         }
 
+        sale.setStartDate(createSaleRequest.getStartDate());
+        sale.setHour(createSaleRequest.getHour());
+        sale.setMinutes(createSaleRequest.getMinutes());
+        sale.setIsDefaultTimeChecked(createSaleRequest.getIsDefaultTimeChecked());
         sale.setDeskId(createSaleRequest.getDeskId());
         sale.setDeskName(desk.get().getName());
         sale.setDeviceId(desk.get().getDevice().getId());
@@ -55,11 +58,16 @@ public class SaleManager implements SaleService {
     }
 
     @Override
-    public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
-        return modelMapperManager.forResponse()
-                .map(saleRepository.findByDeskId(
-                                UUID.fromString(String.valueOf((id))))
-                        , GetSaleByDeskIdRequest.class);
+    public GetSaleByDeskIdRequest getSaleByDeskIdRequest(String id) {
+
+        Optional<Sale> saleDetails = saleRepository.findById(UUID.fromString("83f91dba-f560-4ca8-a90e-f06bd9a3bc9b"));
+
+        if(saleDetails == null)
+            return null;
+        else{
+            return modelMapperManager.forResponse()
+                    .map(saleDetails, GetSaleByDeskIdRequest.class);
+        }
     }
 
 }

@@ -8,5 +8,5 @@ import java.util.UUID;
 public interface SaleService {
     void add(CreateSaleRequest createSaleRequest);
 
-    GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id);
+    GetSaleByDeskIdRequest getSaleByDeskIdRequest(String id);
 }

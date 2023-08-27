@@ -2,10 +2,7 @@ package az.monitoringSoftware.monitoringSoftware.domain.entities;
 
 import az.monitoringSoftware.monitoringSoftware.domain.common.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -13,7 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,6 +25,7 @@ public class Sale extends BaseEntity {
     private Double devicePrice;
     private Integer hour;
     private Integer minutes;
+    private Boolean isDefaultTimeChecked;
     @OneToMany(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SaleProduct> saleProducts = new ArrayList<>();
 

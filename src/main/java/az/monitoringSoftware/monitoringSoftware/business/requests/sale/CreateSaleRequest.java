@@ -19,7 +19,7 @@ public class CreateSaleRequest {
     private UUID deskId;
     private Integer hour;
     private Integer minutes;
-    private Boolean defaultTimeCheck;
+    private Boolean isDefaultTimeChecked;
     private List<CreatSaleProductRequest> saleProducts;
 
 }

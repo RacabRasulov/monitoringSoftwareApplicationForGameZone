@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface SaleRepository extends JpaRepository<Sale, UUID> {
 
 
-    Optional<Sale> findByDeskId(UUID id);
+    Sale findByDeskId(UUID id);
 }
