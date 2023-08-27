@@ -58,9 +58,9 @@ public class SaleManager implements SaleService {
     }
 
     @Override
-    public GetSaleByDeskIdRequest getSaleByDeskIdRequest(String id) {
+    public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
 
-        Optional<Sale> saleDetails = saleRepository.findById(UUID.fromString("83f91dba-f560-4ca8-a90e-f06bd9a3bc9b"));
+        var saleDetails = saleRepository.findByDeskId(id);
 
         if(saleDetails == null)
             return null;

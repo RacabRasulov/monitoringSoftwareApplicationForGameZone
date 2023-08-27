@@ -26,6 +26,6 @@ public class SaleController {
     @GetMapping("/getSaleByDeskId/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<GetSaleByDeskIdRequest> getSaleByDeskIdRequest(@PathVariable String id){
-       return ResponseEntity.ok( saleManager.getSaleByDeskIdRequest(id));
+       return ResponseEntity.ok( saleManager.getSaleByDeskIdRequest(UUID.fromString(id)));
     }
 }
