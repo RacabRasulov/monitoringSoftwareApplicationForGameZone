@@ -4,6 +4,7 @@ import az.monitoringSoftware.monitoringSoftware.business.concretes.SaleManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.EndSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.UpdateSaleRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,5 +35,11 @@ public class SaleController {
     @ResponseStatus(HttpStatus.OK)
     public void endSale(@RequestBody @Valid EndSaleRequest endSaleRequest) {
         saleManager.endSaleRequest(endSaleRequest);
+    }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestBody @Valid UpdateSaleRequest updateSaleRequest){
+        saleManager.update(updateSaleRequest);
     }
 }
