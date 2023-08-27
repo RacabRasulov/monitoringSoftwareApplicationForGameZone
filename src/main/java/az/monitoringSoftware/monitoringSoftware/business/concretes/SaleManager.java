@@ -12,6 +12,7 @@ import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.SaleReposit
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Desk;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Sale;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.SaleProduct;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class SaleManager implements SaleService {
     private final SaleRepository saleRepository;
     private final ModelMapperManager modelMapperManager;
@@ -100,6 +102,8 @@ public class SaleManager implements SaleService {
             saleProduct.setName(createSaleProduct.getName());
             saleProduct.setPrice(createSaleProduct.getPrice());
             saleProduct.setOrderCount(createSaleProduct.getOrderCount());
+            saleProduct.setCost(createSaleProduct.getCost());
+            saleProduct.setNameOfSeller(createSaleProduct.getNameOfSeller());
             sale.getSaleProducts().add(saleProduct);
         }
 
