@@ -38,6 +38,8 @@ public class SaleManager implements SaleService {
             saleProduct.setName(createSaleProduct.getName());
             saleProduct.setPrice(createSaleProduct.getPrice());
             saleProduct.setOrderCount(createSaleProduct.getOrderCount());
+            saleProduct.setCost(createSaleProduct.getCost());
+            saleProduct.setNameOfSeller(createSaleProduct.getNameOfSeller());
             sale.getSaleProducts().add(saleProduct);
         }
 
