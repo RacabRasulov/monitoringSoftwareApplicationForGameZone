@@ -25,8 +25,8 @@ public class GetEmployeeByIdRequest {
     @Size(min = 2, max = 64, message = "Employe surname length must be min 2 max 64")
     private String surname;
     private UUID id;
-    private Integer contactNumber;
+    private String contactNumber;
     private String passportSeries;
-    private Integer passportNumber;
+    private String passportNumber;
     private double salary;
 }

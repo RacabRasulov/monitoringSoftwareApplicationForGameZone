@@ -21,7 +21,7 @@ import java.util.UUID;
 public class EmployeeController {
     public final EmployeeManager employeeManager;
 
-    @PutMapping("/add")
+    @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid CreatEmployeeRequest creatEmployeeRequest) throws BusinessException {
 
