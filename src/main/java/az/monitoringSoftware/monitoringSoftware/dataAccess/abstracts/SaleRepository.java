@@ -12,4 +12,7 @@ public interface SaleRepository extends JpaRepository<Sale, UUID> {
 
 
     Sale findByDeskId(UUID id);
+    Optional<Sale> findByIsSaleEndedIsFalseAndDeskId(UUID id);
+
+
 }

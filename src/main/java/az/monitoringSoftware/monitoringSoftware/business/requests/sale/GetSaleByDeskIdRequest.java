@@ -1,10 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.business.requests.sale;
 
 import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.UUID;
 
 @Data
 @Builder
+@ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class GetSaleByDeskIdRequest {
