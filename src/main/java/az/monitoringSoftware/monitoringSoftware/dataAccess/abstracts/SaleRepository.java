@@ -13,6 +13,7 @@ public interface SaleRepository extends JpaRepository<Sale, UUID> {
 
 
     Sale findByDeskId(UUID id);
+    void deleteByDeskId(UUID id);
     @Query("SELECT s FROM Sale s WHERE s.deskId = :id AND (s.isSaleEnded = false OR s.isSaleEnded IS NULL)")
     Optional<Sale> findSalesByDeskIdAndIsSaleEnded(UUID id);
 

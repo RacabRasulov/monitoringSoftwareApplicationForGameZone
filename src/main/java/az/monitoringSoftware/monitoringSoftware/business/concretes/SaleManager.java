@@ -4,6 +4,7 @@ import az.monitoringSoftware.monitoringSoftware.business.abstracts.SaleService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.EndSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.UpdateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;
@@ -82,6 +83,42 @@ public class SaleManager implements SaleService {
         saleRepository.save(sale);
 
     }
+
+    @Override
+    public void update(UpdateSaleRequest updateSaleRequest) {
+        saleRepository.deleteByDeskId(updateSaleRequest.getDeskId());
+
+        Optional<Desk> desk = deskRepository.findById(updateSaleRequest.getDeskId());
+
+        Sale sale = new Sale();
+
+        for (CreatSaleProductRequest createSaleProduct : updateSaleRequest.getSaleProducts()) {
+            SaleProduct saleProduct = new SaleProduct();
+            saleProduct.setProductId(createSaleProduct.getProductId());
+            saleProduct.setName(createSaleProduct.getName());
+            saleProduct.setPrice(createSaleProduct.getPrice());
+            saleProduct.setOrderCount(createSaleProduct.getOrderCount());
+            sale.getSaleProducts().add(saleProduct);
+        }
+
+        sale.setStartDate(updateSaleRequest.getStartDate());
+        sale.setHour(updateSaleRequest.getHour());
+        sale.setMinutes(updateSaleRequest.getMinutes());
+        sale.setIsDefaultTimeChecked(updateSaleRequest.getIsDefaultTimeChecked());
+        sale.setDeskId(updateSaleRequest.getDeskId());
+        sale.setDeskName(desk.get().getName());
+        sale.setDeviceId(desk.get().getDevice().getId());
+        sale.setDeviceName(desk.get().getDevice().getName());
+        sale.setDevicePrice(desk.get().getDevice().getPrice());
+        for (SaleProduct product : sale.getSaleProducts()) {
+            product.setSale(sale);
+        }
+        saleRepository.save(sale);
+
+
+    }
+
+
 }
 
 
