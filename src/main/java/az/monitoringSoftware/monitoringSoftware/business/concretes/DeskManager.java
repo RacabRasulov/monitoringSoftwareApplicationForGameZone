@@ -66,8 +66,13 @@ public class DeskManager implements DeskService {
                 findById(UUID.fromString(String.valueOf
                         (updateDeskRequest.getId())));
 
-        modelMapperManager.forRequest().map(updateDeskRequest, desk.get());
-        deskRepository.save(desk.get());
+        if (desk.isPresent()) {
+            Boolean lastUsingStatus = desk.get().getLastUsingStatus();
+            if (lastUsingStatus == null || !lastUsingStatus) {
+                modelMapperManager.forRequest().map(updateDeskRequest, desk.get());
+                deskRepository.save(desk.get());
+            }
+        }
     }
 
 }

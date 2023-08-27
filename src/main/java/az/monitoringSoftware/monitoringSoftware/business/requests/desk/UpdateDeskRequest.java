@@ -20,4 +20,5 @@ public class UpdateDeskRequest {
     private String name;
     private UUID id;
     private Boolean lastUsingStatus;
+    private UUID deviceId;
 }
