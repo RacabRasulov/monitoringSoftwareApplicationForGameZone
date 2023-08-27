@@ -10,7 +10,4 @@ public interface SaleService {
     void add(CreateSaleRequest createSaleRequest);
 
     GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id);
-
-
-    GetSaleIdEqualsRequestId getSaleIdEqualsRequestId(UUID id);
 }

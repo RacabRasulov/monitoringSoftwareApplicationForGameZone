@@ -60,7 +60,7 @@ public class SaleManager implements SaleService {
     @Override
     public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
 
-        var saleDetails = saleRepository.findByDeskId(id);
+        var saleDetails = saleRepository.findByIsSaleEndedIsFalseAndDeskId(id);
 
         if (saleDetails == null)
             return null;
@@ -68,19 +68,6 @@ public class SaleManager implements SaleService {
             return modelMapperManager.forResponse()
                     .map(saleDetails, GetSaleByDeskIdRequest.class);
         }
-
-
-    }
-
-    @Override
-    public GetSaleIdEqualsRequestId getSaleIdEqualsRequestId(UUID id) {
-        Optional<Sale> saleOptional =saleRepository.findByIsSaleEndedIsFalseAndDeskId(id);
-
-        if (saleOptional == null)
-            return null;
-
-          return   modelMapperManager.forResponse()
-                    .map(saleOptional,GetSaleIdEqualsRequestId.class);
 
 
     }
