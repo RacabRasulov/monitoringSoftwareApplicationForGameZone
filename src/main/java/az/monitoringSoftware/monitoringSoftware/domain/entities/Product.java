@@ -1,6 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.domain.entities;
 
 import az.monitoringSoftware.monitoringSoftware.domain.common.BaseEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
