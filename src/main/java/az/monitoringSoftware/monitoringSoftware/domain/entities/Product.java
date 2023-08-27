@@ -18,6 +18,8 @@ public class Product extends BaseEntity {
     private String name;
     private double price;
     private String explanation;
+    private double cost;
+    private String nameOfSeller;
 
 
 }

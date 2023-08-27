@@ -14,5 +14,7 @@ public class GetAllProductResponse {
     private String name;
     private Double price;
     private String explanation;
+    private double cost;
+    private String nameOfSeller;
 
 }

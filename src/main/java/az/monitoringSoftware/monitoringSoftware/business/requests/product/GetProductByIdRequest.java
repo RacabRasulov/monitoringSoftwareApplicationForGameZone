@@ -20,6 +20,8 @@ public class GetProductByIdRequest {
     private UUID id;
     private Double price;
     private String explanation;
+    private double cost;
+    private String nameOfSeller;
 
 
 }

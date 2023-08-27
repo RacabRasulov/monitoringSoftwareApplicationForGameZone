@@ -18,9 +18,9 @@ public class Employee extends BaseEntity {
 
     private String name;
     private String surname;
-    private Integer contactNumber;
+    private String contactNumber;
     private String passportSeries;
-    private Integer passportNumber;
+    private String passportNumber;
     private double salary;
 
 }

@@ -2,8 +2,8 @@ package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.SaleService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.sale.EndSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
-import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleIdEqualsRequestId;
 import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;
@@ -68,9 +68,18 @@ public class SaleManager implements SaleService {
             return modelMapperManager.forResponse()
                     .map(saleDetails, GetSaleByDeskIdRequest.class);
         }
-
-
     }
 
+    @Override
+    public void endSaleRequest(EndSaleRequest endSaleRequest) {
+
+        Sale sale = saleRepository.findByDeskId(endSaleRequest.getDeskId());
+        modelMapperManager.forRequest().map(endSaleRequest,sale);
+        saleRepository.save(sale);
+
+    }
 }
+
+
+
 
