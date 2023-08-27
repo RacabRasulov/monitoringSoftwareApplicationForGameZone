@@ -4,6 +4,7 @@ package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 import az.monitoringSoftware.monitoringSoftware.business.concretes.DeskManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskLastUsingStatus;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDeskResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
@@ -53,5 +54,12 @@ public class DeskController {
     public void update(@RequestBody @Valid UpdateDeskRequest updateDeskRequest) {
         deskManager.update(updateDeskRequest);
     }
+    @PutMapping("/updateLastUsingStatus")
+    @ResponseStatus(HttpStatus.OK)
+    public void update(@RequestBody @Valid UpdateDeskLastUsingStatus updateDeskLastUsingStatus) {
+        deskManager.updateLastUsingStatus(updateDeskLastUsingStatus);
+    }
+
+
 
 }

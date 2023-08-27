@@ -3,6 +3,7 @@ package az.monitoringSoftware.monitoringSoftware.business.concretes;
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.DeskService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskLastUsingStatus;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDeskResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
@@ -74,4 +75,15 @@ public class DeskManager implements DeskService {
             }
         }
     }
+
+    @Override
+    public void updateLastUsingStatus(UpdateDeskLastUsingStatus updateDeskLastUsingStatus) {
+
+        Optional<Desk> desk = deskRepository.findById(updateDeskLastUsingStatus.getId());
+
+        modelMapperManager.forRequest().map(updateDeskLastUsingStatus, desk.get());
+        deskRepository.save(desk.get());
+    }
+
+
 }

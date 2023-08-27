@@ -2,6 +2,7 @@ package az.monitoringSoftware.monitoringSoftware.business.abstracts;
 
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskByIdRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskLastUsingStatus;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDeskResponse;
 import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
@@ -20,4 +21,7 @@ public interface DeskService {
     GetDeskByIdRequest getById(UUID id);
 
     void update(UpdateDeskRequest updateDeskRequest);
+
+
+    void updateLastUsingStatus(UpdateDeskLastUsingStatus updateDeskLastUsingStatus);
 }
