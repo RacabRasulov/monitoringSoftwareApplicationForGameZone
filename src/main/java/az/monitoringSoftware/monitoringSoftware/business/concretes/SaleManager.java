@@ -60,7 +60,7 @@ public class SaleManager implements SaleService {
     @Override
     public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
 
-        var saleDetails = saleRepository.findByIsSaleEndedIsFalseAndDeskId(id);
+        var saleDetails = saleRepository.findSalesByDeskIdAndIsSaleEnded(id);
 
         if (saleDetails == null)
             return null;
