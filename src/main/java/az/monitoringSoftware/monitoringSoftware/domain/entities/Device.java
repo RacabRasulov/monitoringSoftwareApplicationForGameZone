@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Devices")
+@Table(name = "devices")
 public class Device extends BaseEntity {
     private String name;
     private double price;

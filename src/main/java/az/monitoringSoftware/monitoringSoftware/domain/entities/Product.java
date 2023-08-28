@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Products")
+@Table(name = "products")
 public class Product extends BaseEntity {
     private String name;
     private double price;
