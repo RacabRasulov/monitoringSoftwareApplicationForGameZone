@@ -26,4 +26,5 @@ public class UpdateProductRequest {
     private double cost;
     private String nameOfSeller;
     private Integer count;
+    private Double totalDebt;
 }
