@@ -15,6 +15,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,6 +34,7 @@ public class ProductManager implements ProductService {
         productBusinessRules.checkIfProductExists(createProductRequest.getName());
         Product product = modelMapperManager.forRequest()
                 .map(createProductRequest, Product.class);
+        product.setCreatedAt(LocalDateTime.now());
         productRepository.save(product);
     }
 
@@ -66,6 +68,7 @@ public class ProductManager implements ProductService {
                     ));
 
         modelMapperManager.forRequest().map(updateProductRequest, product.get());
+        product.get().setUpdatedAt(LocalDateTime.now());
         productRepository.save(product.get());
     }
 

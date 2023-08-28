@@ -22,6 +22,6 @@ public class GetProductByIdRequest {
     private String explanation;
     private double cost;
     private String nameOfSeller;
-
+    private Integer count;
 
 }

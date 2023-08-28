@@ -21,6 +21,6 @@ public class Product extends BaseEntity {
     private String explanation;
     private double cost;
     private String nameOfSeller;
-
+    private Integer count;
 
 }
