@@ -26,7 +26,7 @@ public class DailyExpenseManager implements DailyExpenseService {
 
         DailyExpense dailyExpense = modelMapperManager.forRequest()
                 .map(creatDailyExpenseRequest, DailyExpense.class);
-
+        dailyExpense.setCreatedAt(creatDailyExpenseRequest.getCreatedAt().toLocalDateTime());
         dailyExpenseRepository.save(dailyExpense);
     }
 
@@ -52,7 +52,7 @@ public class DailyExpenseManager implements DailyExpenseService {
                 .findById(updateDailyExpenseRequest.getId());
 
         DailyExpense dailyExpense1 = dailyExpense.get();
-
+        dailyExpense1.setCreatedAt(updateDailyExpenseRequest.getCreatedAt().toLocalDateTime());
         modelMapperManager.forRequest().map(updateDailyExpenseRequest, dailyExpense1);
         dailyExpenseRepository.save(dailyExpense1);
 

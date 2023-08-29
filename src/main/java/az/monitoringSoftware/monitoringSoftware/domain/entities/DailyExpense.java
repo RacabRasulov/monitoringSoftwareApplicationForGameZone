@@ -13,6 +13,8 @@ import java.util.Set;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "dailyExpenses")
 public class DailyExpense extends BaseEntity {
     private Double amount;
