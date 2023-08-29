@@ -1,6 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.business.abstracts;
 
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreateDailyExpenseRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.GetDailyExpensesByDatesInterval;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.UpdateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense.GetAllDailyExpenseResponse;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.DailyExpense;
@@ -19,4 +20,5 @@ public interface DailyExpenseService {
     void update(UpdateDailyExpenseRequest updateDailyExpenseRequest);
 
     List<GetAllDailyExpenseResponse> getAllByCreatedAt(String dateString);
+    List<GetDailyExpensesByDatesInterval> getAllDailyExpensesByDateInterval(String fromDateStr,String toDateStr);
 }

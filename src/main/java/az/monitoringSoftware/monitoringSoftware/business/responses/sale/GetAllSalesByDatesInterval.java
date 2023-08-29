@@ -28,4 +28,5 @@ public class GetAllSalesByDatesInterval {
     private Double totalGameAmount;
     private Double totalAmount;
     private Boolean isSaleEnded;
+    private List<CreatSaleProductRequest> saleProducts;
 }

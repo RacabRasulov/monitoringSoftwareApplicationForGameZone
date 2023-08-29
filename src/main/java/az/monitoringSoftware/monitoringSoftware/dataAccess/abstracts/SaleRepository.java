@@ -25,8 +25,5 @@ public interface SaleRepository extends JpaRepository<Sale, UUID> {
     Optional<Sale> findSalesByDeskIdAndIsSaleNotEnded(UUID id);
 
     @Query("SELECT s FROM Sale s WHERE s.startDate >= :fromDate AND s.startDate <= :toDate AND s.isSaleEnded = true")
-    List<Sale> findSalesByDateRangeAndEnded(
-            @Param("fromDate") LocalDateTime fromDate,
-            @Param("toDate") LocalDateTime toDate
-    );
+    List<Sale> findSalesByDateRangeAndEnded(@Param("fromDate") LocalDateTime fromDate, @Param("toDate") LocalDateTime toDate);
 }

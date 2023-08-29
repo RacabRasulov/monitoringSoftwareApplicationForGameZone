@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class UpdateDailyExpenseRequest {
     private LocalDateTime createdAt;
     private Double amount;
     private UUID id;
+    private UUID expenseId;
 }

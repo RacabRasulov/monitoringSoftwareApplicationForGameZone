@@ -10,7 +10,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.util.Set;
 
 @Entity
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

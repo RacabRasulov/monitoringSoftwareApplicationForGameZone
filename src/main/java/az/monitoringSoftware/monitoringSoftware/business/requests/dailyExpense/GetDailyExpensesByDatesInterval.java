@@ -1,12 +1,10 @@
-package az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense;
+package az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -14,10 +12,9 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class GetAllDailyExpenseResponse {
+public class GetDailyExpensesByDatesInterval {
     private UUID id;
     private Double amount;
     private LocalDateTime createdAt;
     private String expenseName;
-    private UUID expenseId;
 }

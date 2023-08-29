@@ -2,20 +2,23 @@ package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.DailyExpenseService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreateDailyExpenseRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.GetDailyExpensesByDatesInterval;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.UpdateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense.GetAllDailyExpenseResponse;
+import az.monitoringSoftware.monitoringSoftware.business.responses.sale.GetAllSalesByDatesInterval;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DailyExpenseRepository;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.DailyExpense;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,8 +62,6 @@ public class DailyExpenseManager implements DailyExpenseService {
         dailyExpense1.setCreatedAt(updateDailyExpenseRequest.getCreatedAt());
         modelMapperManager.forRequest().map(updateDailyExpenseRequest, dailyExpense1);
         dailyExpenseRepository.save(dailyExpense1);
-
-
     }
 
     @Override
@@ -73,5 +74,30 @@ public class DailyExpenseManager implements DailyExpenseService {
         return dailyExpenseRepository.findAllByCreatedAtDate(date)
                 .stream()
                 .map(d->modelMapperManager.forResponse().map(d,GetAllDailyExpenseResponse.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GetDailyExpensesByDatesInterval> getAllDailyExpensesByDateInterval(String fromDateStr, String toDateStr) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        try {
+
+            Date fromDate = dateFormat.parse(fromDateStr);
+            Date toDate = dateFormat.parse(toDateStr);
+
+            // Convert Date objects to LocalDateTime
+            LocalDateTime fromDateTime = fromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            LocalDateTime toDateTime = toDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+
+            return dailyExpenseRepository.findAllByDateRangeAndEnded(fromDateTime, toDateTime)
+                    .stream()
+                    .map(x->modelMapperManager.forResponse().map(x, GetDailyExpensesByDatesInterval.class))
+                    .collect(Collectors.toList());
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 }

@@ -149,27 +149,27 @@ public class SaleManager implements SaleService {
 
     @Override
     public List<GetAllSalesByDatesInterval> getAllByDatesInterval(String fromDateStr, String toDateStr) {
-// Define the date format that matches your input string format
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
         try {
-            // Parse the fromDate and toDate strings to Date objects
+
             Date fromDate = dateFormat.parse(fromDateStr);
             Date toDate = dateFormat.parse(toDateStr);
 
             // Convert Date objects to LocalDateTime
             LocalDateTime fromDateTime = fromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             LocalDateTime toDateTime = toDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-var data = saleRepository.findSalesByDateRangeAndEnded(fromDateTime, toDateTime);
-            // Use the custom repository method to get the sales
+
+
             return saleRepository.findSalesByDateRangeAndEnded(fromDateTime, toDateTime)
                     .stream()
                     .map(x->modelMapperManager.forResponse().map(x,GetAllSalesByDatesInterval.class))
                     .collect(Collectors.toList());
         } catch (ParseException e) {
-            // Handle the exception appropriately (e.g., log it or return an error response)
-            e.printStackTrace(); // This is a simple example, consider proper error handling.
-            return Collections.emptyList(); // Return an empty list or handle the error case.
+
+            e.printStackTrace();
+            return Collections.emptyList();
         }
     }
 }

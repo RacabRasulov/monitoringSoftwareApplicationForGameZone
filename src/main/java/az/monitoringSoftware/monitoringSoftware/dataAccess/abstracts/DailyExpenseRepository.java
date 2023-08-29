@@ -15,4 +15,7 @@ import java.util.UUID;
 public interface DailyExpenseRepository extends JpaRepository<DailyExpense, UUID> {
     @Query("SELECT e FROM DailyExpense e WHERE DATE(e.createdAt) = :date")
     List<DailyExpense> findAllByCreatedAtDate(@Param("date") LocalDate date);
+
+    @Query("SELECT s FROM DailyExpense s WHERE s.createdAt >= :fromDate AND s.createdAt <= :toDate")
+    List<DailyExpense> findAllByDateRangeAndEnded(@Param("fromDate") LocalDateTime fromDate, @Param("toDate") LocalDateTime toDate);
 }

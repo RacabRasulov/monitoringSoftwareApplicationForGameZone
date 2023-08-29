@@ -1,5 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.business.abstracts;
 
+import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.GetDailyExpensesByDatesInterval;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.EndSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
