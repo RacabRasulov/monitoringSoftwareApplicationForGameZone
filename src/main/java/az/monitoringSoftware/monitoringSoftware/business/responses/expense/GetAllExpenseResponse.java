@@ -9,5 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class GetAllExpenseResponse {
+    private UUID id;
     private String name;
 }
