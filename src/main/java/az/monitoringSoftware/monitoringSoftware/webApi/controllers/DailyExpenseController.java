@@ -1,7 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 import az.monitoringSoftware.monitoringSoftware.business.concretes.DailyExpenseManager;
-import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreatDailyExpenseRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.UpdateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense.GetAllDailyExpenseResponse;
 import jakarta.validation.Valid;
@@ -20,8 +20,8 @@ public class DailyExpenseController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid CreatDailyExpenseRequest creatDailyExpenseRequest) {
-        dailyExpenseManager.add(creatDailyExpenseRequest);
+    public void add(@RequestBody @Valid CreateDailyExpenseRequest createDailyExpenseRequest) {
+        dailyExpenseManager.add(createDailyExpenseRequest);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -43,5 +43,9 @@ public class DailyExpenseController {
         dailyExpenseManager.update(updateDailyExpenseRequest);
     }
 
-
+    @GetMapping("/getAllByDate/{date}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GetAllDailyExpenseResponse> getAllByDate(@PathVariable String date) {
+        return dailyExpenseManager.getAllByCreatedAt(date);
+    }
 }
