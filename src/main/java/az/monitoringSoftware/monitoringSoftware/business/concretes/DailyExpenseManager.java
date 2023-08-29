@@ -1,7 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.DailyExpenseService;
-import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreateDailyExpenseRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreatDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.UpdateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense.GetAllDailyExpenseResponse;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
@@ -26,11 +26,11 @@ public class DailyExpenseManager implements DailyExpenseService {
     public final DailyExpenseRepository dailyExpenseRepository;
 
     @Override
-    public void add(CreateDailyExpenseRequest createDailyExpenseRequest) {
+    public void add(CreatDailyExpenseRequest createDailyExpenseRequest) {
 
         DailyExpense dailyExpense = modelMapperManager.forRequest()
                 .map(createDailyExpenseRequest, DailyExpense.class);
-        dailyExpense.setCreatedAt(createDailyExpenseRequest.getCreatedAt().toLocalDateTime());
+        dailyExpense.setCreatedAt(createDailyExpenseRequest.getCreatedAt());
         dailyExpenseRepository.save(dailyExpense);
     }
 
@@ -56,7 +56,7 @@ public class DailyExpenseManager implements DailyExpenseService {
                 .findById(updateDailyExpenseRequest.getId());
 
         DailyExpense dailyExpense1 = dailyExpense.get();
-        dailyExpense1.setCreatedAt(updateDailyExpenseRequest.getCreatedAt().toLocalDateTime());
+        dailyExpense1.setCreatedAt(updateDailyExpenseRequest.getCreatedAt());
         modelMapperManager.forRequest().map(updateDailyExpenseRequest, dailyExpense1);
         dailyExpenseRepository.save(dailyExpense1);
 
