@@ -1,7 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.business.concretes;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.DailyExpenseService;
-import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreatDailyExpenseRequest;
+import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.UpdateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense.GetAllDailyExpenseResponse;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
@@ -26,7 +26,7 @@ public class DailyExpenseManager implements DailyExpenseService {
     public final DailyExpenseRepository dailyExpenseRepository;
 
     @Override
-    public void add(CreatDailyExpenseRequest createDailyExpenseRequest) {
+    public void add(CreateDailyExpenseRequest createDailyExpenseRequest) {
 
         DailyExpense dailyExpense = modelMapperManager.forRequest()
                 .map(createDailyExpenseRequest, DailyExpense.class);

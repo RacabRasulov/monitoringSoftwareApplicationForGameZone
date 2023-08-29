@@ -4,6 +4,7 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.Cr
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 @Data
@@ -12,7 +13,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class UpdateSaleRequest {
-    private Timestamp startDate;
+    private LocalDateTime startDate;
     private UUID deskId;
     private Integer hour;
     private Integer minutes;

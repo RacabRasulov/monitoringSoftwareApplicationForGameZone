@@ -13,7 +13,7 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class CreatDailyExpenseRequest {
+public class CreateDailyExpenseRequest {
 
     private LocalDateTime createdAt;
     private Double amount;
