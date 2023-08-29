@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CreatDailyExpenseRequest {
 
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     private Double amount;
     private UUID expenseId;
 }

@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -16,6 +17,6 @@ import java.util.UUID;
 public class GetAllDailyExpenseResponse {
     private UUID id;
     private Double amount;
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     private String expenseName;
 }

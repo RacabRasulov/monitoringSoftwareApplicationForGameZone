@@ -6,13 +6,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class GetDailyExpenseByIdRequest {
+    private UUID id;
     private Double amount;
-    private Timestamp createdAt;
+    private LocalDateTime createdAt;
     private String expenseName;
 }
