@@ -3,6 +3,7 @@ package az.monitoringSoftware.monitoringSoftware.business.requests.sale;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -12,7 +13,7 @@ import java.util.UUID;
 @ToString
 public class GetSaleIdEqualsRequestId {
 
-    private Timestamp startDate;
+    private LocalDateTime startDate;
     private String deviceName;
     private UUID deviceId;
     private String deskName;

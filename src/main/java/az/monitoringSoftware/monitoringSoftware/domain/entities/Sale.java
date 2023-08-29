@@ -31,6 +31,7 @@ public class Sale extends BaseEntity {
     private Double totalProductAmount;
     private Double totalGameAmount;
     private Double totalAmount;
+    private Long totalMinutes;
     private Boolean isSaleEnded;
     @OneToMany(mappedBy = "sale", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SaleProduct> saleProducts = new ArrayList<>();

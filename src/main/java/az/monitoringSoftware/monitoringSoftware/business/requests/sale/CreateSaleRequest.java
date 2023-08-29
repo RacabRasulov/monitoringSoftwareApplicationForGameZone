@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class CreateSaleRequest {
-    private LocalDateTime startDate;
+    private Timestamp startDate;
     private UUID deskId;
     private Integer hour;
     private Integer minutes;

@@ -18,6 +18,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -68,7 +69,7 @@ public class SaleManager implements SaleService {
     @Override
     public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
 
-        var saleDetails = saleRepository.findSalesByDeskIdAndIsSaleEnded(id);
+        var saleDetails = saleRepository.findSalesByDeskIdAndIsSaleNotEnded(id);
 
         if (saleDetails == null)
             return null;
@@ -81,21 +82,27 @@ public class SaleManager implements SaleService {
     @Override
     public void endSaleRequest(EndSaleRequest endSaleRequest) {
 
-        Sale sale = saleRepository.findByDeskId(endSaleRequest.getDeskId());
+        Optional<Sale> sale = saleRepository.findSalesByDeskIdAndIsSaleNotEnded(endSaleRequest.getDeskId());
 
-        for(SaleProduct saleProduct : sale.getSaleProducts()){
+        for(SaleProduct saleProduct : sale.get().getSaleProducts()){
             //update product stock count
             Optional<Product> product = productRepository.findById(saleProduct.getProductId());
             product.get().setStockCount(product.get().getCount() - saleProduct.getOrderCount());
             productRepository.save(product.get());
         }
-        
-        sale.setTotalAmount(endSaleRequest.getTotalAmount());
-        sale.setEndDate(endSaleRequest.getEndDate().toLocalDateTime());
-        sale.setTotalGameAmount(endSaleRequest.getTotalGameAmount());
-        sale.setTotalProductAmount(endSaleRequest.getTotalProductAmount());
-        sale.setIsSaleEnded(endSaleRequest.getIsSaleEnded());
-        saleRepository.save(sale);
+
+
+        sale.get().setTotalAmount(endSaleRequest.getTotalAmount());
+        sale.get().setEndDate(endSaleRequest.getEndDate().toLocalDateTime());
+        sale.get().setTotalGameAmount(endSaleRequest.getTotalGameAmount());
+        sale.get().setTotalProductAmount(endSaleRequest.getTotalProductAmount());
+        sale.get().setIsSaleEnded(endSaleRequest.getIsSaleEnded());
+
+        Duration duration = Duration.between(sale.get().getStartDate(), sale.get().getEndDate());
+        long minutesDifference = duration.toMinutes();
+        sale.get().setTotalMinutes(minutesDifference);
+
+        saleRepository.save(sale.get());
 
     }
 
@@ -116,14 +123,9 @@ public class SaleManager implements SaleService {
             saleProduct.setCost(createSaleProduct.getCost());
             saleProduct.setNameOfSeller(createSaleProduct.getNameOfSeller());
             sale.getSaleProducts().add(saleProduct);
-
-            //update product stock count
-            Optional<Product> product = productRepository.findById(createSaleProduct.getProductId());
-            product.get().setStockCount(product.get().getCount() - createSaleProduct.getOrderCount());
-            productRepository.save(product.get());
         }
 
-        sale.setUpdatedAt(updateSaleRequest.getStartDate());
+        sale.setUpdatedAt(updateSaleRequest.getStartDate().toLocalDateTime());
         sale.setHour(updateSaleRequest.getHour());
         sale.setMinutes(updateSaleRequest.getMinutes());
         sale.setIsDefaultTimeChecked(updateSaleRequest.getIsDefaultTimeChecked());
