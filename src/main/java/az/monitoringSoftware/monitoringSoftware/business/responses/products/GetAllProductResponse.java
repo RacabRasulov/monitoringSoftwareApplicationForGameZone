@@ -16,5 +16,7 @@ public class GetAllProductResponse {
     private String explanation;
     private double cost;
     private String nameOfSeller;
-
+    private Integer count;
+    private Double totalDebt;
+    private Integer stockCount;
 }

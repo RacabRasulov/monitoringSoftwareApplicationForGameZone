@@ -54,7 +54,8 @@ public class DeviceManager implements DeviceService {
     @Override
     public void update(UpdateDeviceRequest updateDeviceRequest) {
 
-        Optional<Device> devices = deviceRepository.findById(UUID.fromString(String.valueOf(updateDeviceRequest.getId())));
+        Optional<Device> devices = deviceRepository.findById(UUID
+                .fromString(String.valueOf(updateDeviceRequest.getId())));
 
         Device device = devices.get();
 

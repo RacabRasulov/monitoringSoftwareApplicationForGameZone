@@ -1,28 +1,28 @@
 package az.monitoringSoftware.monitoringSoftware.domain.entities;
 
+
 import az.monitoringSoftware.monitoringSoftware.domain.common.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Set;
+
 @Entity
-@Data
-@Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "desks")
-public class Desk extends BaseEntity {
-
-    private String name;
-    private Boolean lastUsingStatus;
+@Getter
+@Setter
+@Table(name = "dailyExpenses")
+public class DailyExpense extends BaseEntity {
+    private Double amount;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "device_id", nullable = false)
+    @JoinColumn(name = "expense_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Device device;
+    private Expense expense;
+
 
 }

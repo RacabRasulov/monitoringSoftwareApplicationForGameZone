@@ -8,14 +8,17 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.sale.UpdateSal
 import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;
+import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.ProductRepository;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.SaleRepository;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Desk;
+import az.monitoringSoftware.monitoringSoftware.domain.entities.Product;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Sale;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.SaleProduct;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,6 +29,7 @@ public class SaleManager implements SaleService {
     private final SaleRepository saleRepository;
     private final ModelMapperManager modelMapperManager;
     private final DeskRepository deskRepository;
+    private final ProductRepository productRepository;
 
 
     @Override
@@ -46,7 +50,7 @@ public class SaleManager implements SaleService {
             sale.getSaleProducts().add(saleProduct);
         }
 
-        sale.setStartDate(createSaleRequest.getStartDate());
+        sale.setStartDate(createSaleRequest.getStartDate().toLocalDateTime());
         sale.setHour(createSaleRequest.getHour());
         sale.setMinutes(createSaleRequest.getMinutes());
         sale.setIsDefaultTimeChecked(createSaleRequest.getIsDefaultTimeChecked());
@@ -59,7 +63,6 @@ public class SaleManager implements SaleService {
             product.setSale(sale);
         }
         saleRepository.save(sale);
-
     }
 
     @Override
@@ -79,8 +82,16 @@ public class SaleManager implements SaleService {
     public void endSaleRequest(EndSaleRequest endSaleRequest) {
 
         Sale sale = saleRepository.findByDeskId(endSaleRequest.getDeskId());
+
+        for(SaleProduct saleProduct : sale.getSaleProducts()){
+            //update product stock count
+            Optional<Product> product = productRepository.findById(saleProduct.getProductId());
+            product.get().setStockCount(product.get().getCount() - saleProduct.getOrderCount());
+            productRepository.save(product.get());
+        }
+        
         sale.setTotalAmount(endSaleRequest.getTotalAmount());
-        sale.setEndDate(endSaleRequest.getEndDate());
+        sale.setEndDate(endSaleRequest.getEndDate().toLocalDateTime());
         sale.setTotalGameAmount(endSaleRequest.getTotalGameAmount());
         sale.setTotalProductAmount(endSaleRequest.getTotalProductAmount());
         sale.setIsSaleEnded(endSaleRequest.getIsSaleEnded());
@@ -105,9 +116,14 @@ public class SaleManager implements SaleService {
             saleProduct.setCost(createSaleProduct.getCost());
             saleProduct.setNameOfSeller(createSaleProduct.getNameOfSeller());
             sale.getSaleProducts().add(saleProduct);
+
+            //update product stock count
+            Optional<Product> product = productRepository.findById(createSaleProduct.getProductId());
+            product.get().setStockCount(product.get().getCount() - createSaleProduct.getOrderCount());
+            productRepository.save(product.get());
         }
 
-        sale.setStartDate(updateSaleRequest.getStartDate());
+        sale.setUpdatedAt(updateSaleRequest.getStartDate());
         sale.setHour(updateSaleRequest.getHour());
         sale.setMinutes(updateSaleRequest.getMinutes());
         sale.setIsDefaultTimeChecked(updateSaleRequest.getIsDefaultTimeChecked());
@@ -120,11 +136,7 @@ public class SaleManager implements SaleService {
             product.setSale(sale);
         }
         saleRepository.save(sale);
-
-
     }
-
-
 }
 
 

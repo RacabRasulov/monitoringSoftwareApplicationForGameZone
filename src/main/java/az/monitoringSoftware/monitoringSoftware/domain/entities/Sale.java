@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,8 +18,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Table(name = "sales")
 public class Sale extends BaseEntity {
-    private Timestamp startDate;
-    private Timestamp endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String deviceName;
     private UUID deviceId;
     private String deskName;
