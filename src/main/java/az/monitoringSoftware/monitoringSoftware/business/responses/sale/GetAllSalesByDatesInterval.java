@@ -1,19 +1,20 @@
-package az.monitoringSoftware.monitoringSoftware.business.requests.sale;
+package az.monitoringSoftware.monitoringSoftware.business.responses.sale;
 
+import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
 import lombok.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Data
 @Builder
+@ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@ToString
-public class GetSaleIdEqualsRequestId {
-
+public class GetAllSalesByDatesInterval {
     private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String deviceName;
     private UUID deviceId;
     private String deskName;
