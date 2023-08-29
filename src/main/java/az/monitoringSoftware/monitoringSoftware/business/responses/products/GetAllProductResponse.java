@@ -18,4 +18,5 @@ public class GetAllProductResponse {
     private String nameOfSeller;
     private Integer count;
     private Double totalDebt;
+    private Integer stockCount;
 }
