@@ -18,12 +18,10 @@ import java.util.UUID;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, UUID> {
 
-
-    Sale findByDeskId(UUID id);
     void deleteByDeskId(UUID id);
     @Query("SELECT s FROM Sale s WHERE s.deskId = :id AND (s.isSaleEnded = false OR s.isSaleEnded IS NULL)")
     Optional<Sale> findSalesByDeskIdAndIsSaleNotEnded(UUID id);
 
-    @Query("SELECT s FROM Sale s WHERE s.startDate >= :fromDate AND s.startDate <= :toDate AND s.isSaleEnded = true")
-    List<Sale> findSalesByDateRangeAndEnded(@Param("fromDate") LocalDateTime fromDate, @Param("toDate") LocalDateTime toDate);
+    @Query("SELECT s FROM Sale s WHERE FUNCTION('DATE', s.startDate) >= :fromDate AND FUNCTION('DATE', s.startDate) <= :toDate")
+    List<Sale> findSalesBetweenDates(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 }

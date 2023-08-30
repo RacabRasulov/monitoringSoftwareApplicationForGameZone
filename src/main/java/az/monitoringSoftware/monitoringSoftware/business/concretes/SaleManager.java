@@ -150,19 +150,13 @@ public class SaleManager implements SaleService {
     @Override
     public List<GetAllSalesByDatesInterval> getAllByDatesInterval(String fromDateStr, String toDateStr) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
         try {
 
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
             Date fromDate = dateFormat.parse(fromDateStr);
             Date toDate = dateFormat.parse(toDateStr);
-
-            // Convert Date objects to LocalDateTime
-            LocalDateTime fromDateTime = fromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            LocalDateTime toDateTime = toDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-
-
-            return saleRepository.findSalesByDateRangeAndEnded(fromDateTime, toDateTime)
+            
+            return saleRepository.findSalesBetweenDates(fromDate, toDate)
                     .stream()
                     .map(x->modelMapperManager.forResponse().map(x,GetAllSalesByDatesInterval.class))
                     .collect(Collectors.toList());
