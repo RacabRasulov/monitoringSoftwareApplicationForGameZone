@@ -78,19 +78,14 @@ public class DailyExpenseManager implements DailyExpenseService {
 
     @Override
     public List<GetDailyExpensesByDatesInterval> getAllDailyExpensesByDateInterval(String fromDateStr, String toDateStr) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
         try {
 
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
             Date fromDate = dateFormat.parse(fromDateStr);
             Date toDate = dateFormat.parse(toDateStr);
 
-            // Convert Date objects to LocalDateTime
-            LocalDateTime fromDateTime = fromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            LocalDateTime toDateTime = toDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-
-
-            return dailyExpenseRepository.findAllByDateRangeAndEnded(fromDateTime, toDateTime)
+            return dailyExpenseRepository.findDailyExpensesBetweenDates(fromDate, toDate)
                     .stream()
                     .map(x->modelMapperManager.forResponse().map(x, GetDailyExpensesByDatesInterval.class))
                     .collect(Collectors.toList());
