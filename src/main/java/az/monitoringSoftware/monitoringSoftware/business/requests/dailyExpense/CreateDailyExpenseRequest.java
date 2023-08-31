@@ -15,7 +15,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CreateDailyExpenseRequest {
 
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
     private Double amount;
     private UUID expenseId;
 }

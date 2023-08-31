@@ -33,7 +33,7 @@ public class DailyExpenseManager implements DailyExpenseService {
 
         DailyExpense dailyExpense = modelMapperManager.forRequest()
                 .map(createDailyExpenseRequest, DailyExpense.class);
-        dailyExpense.setCreatedAt(createDailyExpenseRequest.getCreatedAt());
+        dailyExpense.setCreatedAt(createDailyExpenseRequest.getCreatedAt().toLocalDateTime());
         dailyExpenseRepository.save(dailyExpense);
     }
 
