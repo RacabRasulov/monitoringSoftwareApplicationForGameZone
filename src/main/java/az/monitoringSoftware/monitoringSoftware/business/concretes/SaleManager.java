@@ -91,11 +91,13 @@ public class SaleManager implements SaleService {
 
         Optional<Sale> sale = saleRepository.findSalesByDeskIdAndIsSaleNotEnded(endSaleRequest.getDeskId());
 
-        for(SaleProduct saleProduct : sale.get().getSaleProducts()){
-            //update product stock count
-            Optional<Product> product = productRepository.findById(saleProduct.getProductId());
-            product.get().setStockCount(product.get().getCount() - saleProduct.getOrderCount());
-            productRepository.save(product.get());
+        if(!sale.get().getSaleProducts().isEmpty()){
+            for(SaleProduct saleProduct : sale.get().getSaleProducts()){
+                //update product stock count
+                Optional<Product> product = productRepository.findById(saleProduct.getProductId());
+                product.get().setStockCount(product.get().getCount() - saleProduct.getOrderCount());
+                productRepository.save(product.get());
+            }
         }
 
 
@@ -115,7 +117,7 @@ public class SaleManager implements SaleService {
 
     @Override
     public void update(UpdateSaleRequest updateSaleRequest) {
-        saleRepository.deleteByDeskId(updateSaleRequest.getDeskId());
+        var saleEntity = saleRepository.findSalesByDeskIdAndIsSaleNotEnded(updateSaleRequest.getDeskId());
 
         Optional<Desk> desk = deskRepository.findById(updateSaleRequest.getDeskId());
 
@@ -132,6 +134,7 @@ public class SaleManager implements SaleService {
             sale.getSaleProducts().add(saleProduct);
         }
 
+        sale.setStartDate(saleEntity.get().getStartDate());
         sale.setUpdatedAt(updateSaleRequest.getStartDate().toLocalDateTime());
         sale.setHour(updateSaleRequest.getHour());
         sale.setMinutes(updateSaleRequest.getMinutes());
@@ -144,6 +147,8 @@ public class SaleManager implements SaleService {
         for (SaleProduct product : sale.getSaleProducts()) {
             product.setSale(sale);
         }
+
+        saleRepository.deleteById(saleEntity.get().getId());
         saleRepository.save(sale);
     }
 
