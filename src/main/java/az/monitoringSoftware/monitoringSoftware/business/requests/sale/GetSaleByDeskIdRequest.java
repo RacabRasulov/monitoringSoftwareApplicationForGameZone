@@ -16,6 +16,7 @@ import java.util.UUID;
 public class GetSaleByDeskIdRequest {
     private LocalDateTime startDate;
     private UUID deskId;
+    private String deskName;
     private Integer hour;
     private Integer minutes;
     private Boolean defaultTimeCheck;
