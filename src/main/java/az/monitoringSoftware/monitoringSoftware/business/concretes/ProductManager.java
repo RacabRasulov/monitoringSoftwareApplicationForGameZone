@@ -31,10 +31,10 @@ public class ProductManager implements ProductService {
 
     @Override
     public void add(CreateProductRequest createProductRequest) throws BusinessException {
-
         Product product = modelMapperManager.forRequest()
                 .map(createProductRequest, Product.class);
         product.setCreatedAt(LocalDateTime.now());
+        product.setStockCount(createProductRequest.getCount());
         productRepository.save(product);
     }
 
