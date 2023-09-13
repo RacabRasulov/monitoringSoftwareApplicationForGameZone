@@ -32,6 +32,11 @@ public class ProductController {
         return productManager.getAll();
     }
 
+    @GetMapping("/getAllWithStock")
+    public List<GetAllProductResponse> getAllWithStock() {
+        return productManager.getAllWithStock();
+    }
+
     @DeleteMapping("delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable String id) {

@@ -21,4 +21,6 @@ public interface ProductService {
     void update(UpdateProductRequest updateProductRequest);
 
     GetProductByIdRequest getById(UUID id);
+
+    List<GetAllProductResponse> getAllWithStock();
 }

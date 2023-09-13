@@ -81,5 +81,17 @@ public class ProductManager implements ProductService {
                         , GetProductByIdRequest.class);
     }
 
+    @Override
+    public List<GetAllProductResponse> getAllWithStock() {
+        List<Product> products = productRepository.findAllWithStock();
+        List<GetAllProductResponse> productsList = products
+                .stream()
+                .map(product -> modelMapperManager.forRequest()
+                        .map(product, GetAllProductResponse.class))
+                .toList();
+
+        return productsList;
+    }
+
 
 }
