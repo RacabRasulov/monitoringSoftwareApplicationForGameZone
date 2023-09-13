@@ -160,11 +160,19 @@ public class SaleManager implements SaleService {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
             Date fromDate = dateFormat.parse(fromDateStr);
             Date toDate = dateFormat.parse(toDateStr);
-            
-            return saleRepository.findSalesBetweenDates(fromDate, toDate)
+
+            var totalSaleAmount = saleRepository.getTotalSaleAmount();
+
+            var sales = saleRepository.findSalesBetweenDates(fromDate, toDate)
                     .stream()
                     .map(x->modelMapperManager.forResponse().map(x,GetAllSalesByDatesInterval.class))
                     .collect(Collectors.toList());
+
+            for(GetAllSalesByDatesInterval sale : sales){
+                sale.setTotalSumAmount(totalSaleAmount);
+            }
+
+            return sales;
         } catch (ParseException e) {
 
             e.printStackTrace();
