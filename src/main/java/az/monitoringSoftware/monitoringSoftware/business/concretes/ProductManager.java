@@ -31,7 +31,7 @@ public class ProductManager implements ProductService {
 
     @Override
     public void add(CreateProductRequest createProductRequest) throws BusinessException {
-        productBusinessRules.checkIfProductExists(createProductRequest.getName());
+
         Product product = modelMapperManager.forRequest()
                 .map(createProductRequest, Product.class);
         product.setCreatedAt(LocalDateTime.now());
