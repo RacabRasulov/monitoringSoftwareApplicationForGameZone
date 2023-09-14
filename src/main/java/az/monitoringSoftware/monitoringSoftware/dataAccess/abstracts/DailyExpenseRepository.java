@@ -21,6 +21,9 @@ public interface DailyExpenseRepository extends JpaRepository<DailyExpense, UUID
     @Query("SELECT s FROM DailyExpense s WHERE FUNCTION('DATE', s.createdAt) >= :fromDate AND FUNCTION('DATE', s.createdAt) <= :toDate")
     List<DailyExpense> findDailyExpensesBetweenDates(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 
+    @Query("SELECT s FROM DailyExpense s WHERE FUNCTION('DATE', s.createdAt) < :toDate")
+    List<DailyExpense> findDailyExpensesToDate(@Param("toDate") Date toDate);
+
     @Query("SELECT SUM(s.amount) FROM DailyExpense s")
     Double getTotalExpenseAmount();
 }

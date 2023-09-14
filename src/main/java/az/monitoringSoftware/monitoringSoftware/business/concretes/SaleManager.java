@@ -164,10 +164,15 @@ public class SaleManager implements SaleService {
             Date fromDate = dateFormat.parse(fromDateStr);
             Date toDate = dateFormat.parse(toDateStr);
 
-            var totalSaleAmount = saleRepository.getTotalSaleAmount();
-            var totalExpenseAmount = dailyExpenseRepository.getTotalExpenseAmount();
-            var totalCheckoutAmount = totalSaleAmount - totalExpenseAmount;
-            totalCheckoutAmount =  Double.parseDouble(String.format("%.2f", totalCheckoutAmount));
+            var toDateSales = saleRepository.findSalesToDate(fromDate);
+            var toDateDailyExpenses = dailyExpenseRepository.findDailyExpensesToDate(fromDate);
+            Double totalCheckoutAmount = 0.0;
+            if(!toDateSales.isEmpty() || !toDateDailyExpenses.isEmpty()){
+                var totalSaleAmount = saleRepository.getTotalSaleAmount();
+                var totalExpenseAmount = dailyExpenseRepository.getTotalExpenseAmount();
+                totalCheckoutAmount = totalSaleAmount - totalExpenseAmount;
+                totalCheckoutAmount =  Double.parseDouble(String.format("%.2f", totalCheckoutAmount));
+            }
 
             var sales = saleRepository.findSalesBetweenDates(fromDate, toDate)
                     .stream()
