@@ -9,6 +9,7 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.Cr
 import az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense.GetAllDailyExpenseResponse;
 import az.monitoringSoftware.monitoringSoftware.business.responses.sale.GetAllSalesByDatesInterval;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
+import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DailyExpenseRepository;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.ProductRepository;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.SaleRepository;
@@ -16,6 +17,7 @@ import az.monitoringSoftware.monitoringSoftware.domain.entities.Desk;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Product;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Sale;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.SaleProduct;
+import jakarta.persistence.Convert;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,7 @@ public class SaleManager implements SaleService {
     private final ModelMapperManager modelMapperManager;
     private final DeskRepository deskRepository;
     private final ProductRepository productRepository;
+    private final DailyExpenseRepository dailyExpenseRepository;
 
 
     @Override
@@ -162,6 +165,9 @@ public class SaleManager implements SaleService {
             Date toDate = dateFormat.parse(toDateStr);
 
             var totalSaleAmount = saleRepository.getTotalSaleAmount();
+            var totalExpenseAmount = dailyExpenseRepository.getTotalExpenseAmount();
+            var totalCheckoutAmount = totalSaleAmount - totalExpenseAmount;
+            totalCheckoutAmount =  Double.parseDouble(String.format("%.2f", totalCheckoutAmount));
 
             var sales = saleRepository.findSalesBetweenDates(fromDate, toDate)
                     .stream()
@@ -169,7 +175,8 @@ public class SaleManager implements SaleService {
                     .collect(Collectors.toList());
 
             for(GetAllSalesByDatesInterval sale : sales){
-                sale.setTotalSumAmount(totalSaleAmount);
+
+                sale.setTotalSumAmount(totalCheckoutAmount);
             }
 
             return sales;
