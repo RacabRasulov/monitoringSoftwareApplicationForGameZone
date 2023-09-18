@@ -20,6 +20,7 @@ public class GetSaleByDeskIdRequest {
     private Integer hour;
     private Integer minutes;
     private Boolean defaultTimeCheck;
+    private Boolean isDefaultTimeChecked;
     private Double devicePrice;
     private List<CreatSaleProductRequest> saleProducts;
 

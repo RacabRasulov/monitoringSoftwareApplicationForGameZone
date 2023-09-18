@@ -98,7 +98,7 @@ public class SaleManager implements SaleService {
             for(SaleProduct saleProduct : sale.get().getSaleProducts()){
                 //update product stock count
                 Optional<Product> product = productRepository.findById(saleProduct.getProductId());
-                product.get().setStockCount(product.get().getCount() - saleProduct.getOrderCount());
+                product.get().setStockCount(product.get().getStockCount() - saleProduct.getOrderCount());
                 productRepository.save(product.get());
             }
         }
