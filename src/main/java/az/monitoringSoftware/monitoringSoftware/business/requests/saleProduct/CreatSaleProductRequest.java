@@ -10,7 +10,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreatSaleProductRequest {
-
     private UUID productId;
     private String name;
     private Double price;

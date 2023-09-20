@@ -1,6 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
-import az.monitoringSoftware.monitoringSoftware.business.concretes.SaleManager;
+import az.monitoringSoftware.monitoringSoftware.business.service.SaleManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.EndSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class SaleController {
     private final SaleManager saleManager;
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid CreateSaleRequest createSaleRequest) {
         saleManager.add(createSaleRequest);
@@ -39,7 +39,7 @@ public class SaleController {
         saleManager.endSaleRequest(endSaleRequest);
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody @Valid UpdateSaleRequest updateSaleRequest){
         saleManager.update(updateSaleRequest);

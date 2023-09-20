@@ -12,12 +12,8 @@ public interface ExpenseService {
 //    void add(CreatExpenseRequest creatExpenseRequest);
 
     void add(CreatExpenseRequest creatExpenseRequest);
-
     void delete(UUID id);
-
     GetExpenseByNameRequest getByName(GetExpenseByNameRequest getExpenseByNameRequest);
-
     List<GetAllExpenseResponse> getAll();
-
     void update(UpdateExpenseRequest updateExpenseRequest);
 }

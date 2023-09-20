@@ -12,12 +12,8 @@ import java.util.UUID;
 
 public interface SaleService {
     void add(CreateSaleRequest createSaleRequest);
-
     GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id);
-
     void endSaleRequest(EndSaleRequest endSaleRequest);
-
     void update(UpdateSaleRequest updateSaleRequest);
-
     List<GetAllSalesByDatesInterval> getAllByDatesInterval(String fromDate,String toDate);
 }

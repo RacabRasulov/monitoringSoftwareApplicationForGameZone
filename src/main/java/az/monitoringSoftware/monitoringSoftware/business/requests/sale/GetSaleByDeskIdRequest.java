@@ -23,5 +23,4 @@ public class GetSaleByDeskIdRequest {
     private Boolean isDefaultTimeChecked;
     private Double devicePrice;
     private List<CreatSaleProductRequest> saleProducts;
-
 }

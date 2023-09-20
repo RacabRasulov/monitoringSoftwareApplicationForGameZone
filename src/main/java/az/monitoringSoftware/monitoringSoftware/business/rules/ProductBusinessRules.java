@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 public class ProductBusinessRules {
 
     private ProductRepository productRepository;
-
     public void checkIfProductExists(String name) throws BusinessException {
         if (productRepository.existsByName(name))
             throw new BusinessException("Product already exists");
     }
-
 
 }

@@ -1,6 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
-import az.monitoringSoftware.monitoringSoftware.business.concretes.DeviceManager;
+import az.monitoringSoftware.monitoringSoftware.business.service.DeviceManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.device.CreatDeviceRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.device.GetDeviceByIdRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.device.UpdateDeviceRequest;
@@ -21,12 +21,11 @@ import java.util.UUID;
 public class DeviceController {
     private final DeviceManager deviceManager;
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     public void add(@RequestBody @Valid CreatDeviceRequest creatDeviceRequest) throws BusinessException {
         deviceManager.add(creatDeviceRequest);
     }
-
 
     @GetMapping("/getAll")
     public List<GetAllDeviceResponse> getAll() {
@@ -49,8 +48,5 @@ public class DeviceController {
     public ResponseEntity<GetDeviceByIdRequest> getById(String id) {
 
         return ResponseEntity.ok(deviceManager.getById(UUID.fromString(id)));
-
     }
-
-
 }

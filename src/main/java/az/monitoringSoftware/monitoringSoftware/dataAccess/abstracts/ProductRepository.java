@@ -13,11 +13,8 @@ import java.util.UUID;
 public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     void deleteById(UUID id);
-
     Optional<Product> findById(UUID id);
-
     boolean existsByName(String name);
-
 
     @Query("SELECT p FROM Product p WHERE p.stockCount > 0")
     List<Product> findAllWithStock();

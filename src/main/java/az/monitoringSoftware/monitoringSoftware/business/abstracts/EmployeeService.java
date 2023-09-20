@@ -10,12 +10,8 @@ import java.util.UUID;
 
 public interface EmployeeService {
     void add(CreatEmployeeRequest creatEmployeeRequest);
-
     List<GetAllEmployeeResponse> getAll();
-
     void delete(UUID id);
-
     GetEmployeeByIdRequest getById(UUID id);
-
     void update(UpdateEmployeeRequest updateEmployeeRequest);
 }

@@ -12,13 +12,9 @@ import java.util.UUID;
 
 public interface DailyExpenseService {
     void add(CreateDailyExpenseRequest createDailyExpenseRequest);
-
     void delete(UUID id);
-
     List<GetAllDailyExpenseResponse> getAll();
-
     void update(UpdateDailyExpenseRequest updateDailyExpenseRequest);
-
     List<GetAllDailyExpenseResponse> getAllByCreatedAt(String dateString);
     List<GetDailyExpensesByDatesInterval> getAllDailyExpensesByDateInterval(String fromDateStr,String toDateStr);
 }

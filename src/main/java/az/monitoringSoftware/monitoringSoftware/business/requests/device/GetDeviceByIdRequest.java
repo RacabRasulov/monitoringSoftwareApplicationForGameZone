@@ -15,7 +15,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetDeviceByIdRequest {
-
     @NotNull(message = "Product name can't be null")
     @Size(min = 2, max = 64, message = "Product name length must be min 2 max 64")
     private String name;

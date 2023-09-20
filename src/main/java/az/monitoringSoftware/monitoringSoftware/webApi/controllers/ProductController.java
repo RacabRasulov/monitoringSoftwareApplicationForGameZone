@@ -1,6 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
-import az.monitoringSoftware.monitoringSoftware.business.concretes.ProductManager;
+import az.monitoringSoftware.monitoringSoftware.business.service.ProductManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.product.CreateProductRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.product.GetProductByIdRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.product.UpdateProductRequest;
@@ -21,7 +21,7 @@ import java.util.UUID;
 public class ProductController {
     private final ProductManager productManager;
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid CreateProductRequest createProductRequest) throws BusinessException {
         productManager.add(createProductRequest);
@@ -43,7 +43,7 @@ public class ProductController {
         productManager.delete(UUID.fromString(id));
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody UpdateProductRequest updateProductRequest) {
         productManager.update(updateProductRequest);
@@ -52,8 +52,5 @@ public class ProductController {
     @GetMapping("/getById")
     public ResponseEntity<GetProductByIdRequest> getById(String id) {
         return ResponseEntity.ok(productManager.getById(UUID.fromString(id)));
-
-
     }
-
 }

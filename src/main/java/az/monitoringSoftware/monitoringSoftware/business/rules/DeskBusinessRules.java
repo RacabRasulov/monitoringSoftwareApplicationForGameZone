@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class DeskBusinessRules {
     public final DeskRepository deskRepository;
-
     public void checkIfDeskExists(String name) throws BusinessException {
         if (deskRepository.existsByName(name))
             throw new BusinessException("Desk already exists");

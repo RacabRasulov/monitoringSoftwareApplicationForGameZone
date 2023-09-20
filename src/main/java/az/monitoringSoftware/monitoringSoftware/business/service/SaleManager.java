@@ -1,4 +1,4 @@
-package az.monitoringSoftware.monitoringSoftware.business.concretes;
+package az.monitoringSoftware.monitoringSoftware.business.service;
 
 import az.monitoringSoftware.monitoringSoftware.business.abstracts.SaleService;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.CreateSaleRequest;
@@ -6,7 +6,6 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.sale.EndSaleRe
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.GetSaleByDeskIdRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.sale.UpdateSaleRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.saleProduct.CreatSaleProductRequest;
-import az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense.GetAllDailyExpenseResponse;
 import az.monitoringSoftware.monitoringSoftware.business.responses.sale.GetAllSalesByDatesInterval;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DailyExpenseRepository;
@@ -17,22 +16,19 @@ import az.monitoringSoftware.monitoringSoftware.domain.entities.Desk;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Product;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.Sale;
 import az.monitoringSoftware.monitoringSoftware.domain.entities.SaleProduct;
-import jakarta.persistence.Convert;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 @Transactional
 public class SaleManager implements SaleService {
@@ -42,12 +38,11 @@ public class SaleManager implements SaleService {
     private final ProductRepository productRepository;
     private final DailyExpenseRepository dailyExpenseRepository;
 
-
     @Override
     public void add(CreateSaleRequest createSaleRequest) {
+        log.info("There was an ad Sale when the new table was set up" + createSaleRequest);
         Optional<Desk> desk = deskRepository.findById(UUID.fromString(String
                 .valueOf(createSaleRequest.getDeskId())));
-
         Sale sale = new Sale();
 
         for (CreatSaleProductRequest createSaleProduct : createSaleRequest.getSaleProducts()) {
@@ -60,7 +55,6 @@ public class SaleManager implements SaleService {
             saleProduct.setNameOfSeller(createSaleProduct.getNameOfSeller());
             sale.getSaleProducts().add(saleProduct);
         }
-
         sale.setStartDate(createSaleRequest.getStartDate().toLocalDateTime());
         sale.setHour(createSaleRequest.getHour());
         sale.setMinutes(createSaleRequest.getMinutes());
@@ -73,14 +67,14 @@ public class SaleManager implements SaleService {
         for (SaleProduct product : sale.getSaleProducts()) {
             product.setSale(sale);
         }
+        log.info("The sale was saved in the database" + sale);
         saleRepository.save(sale);
     }
 
     @Override
     public GetSaleByDeskIdRequest getSaleByDeskIdRequest(UUID id) {
-
+        log.info("Finding sales based on entered id" + id);
         var saleDetails = saleRepository.findSalesByDeskIdAndIsSaleNotEnded(id);
-
         if (saleDetails == null)
             return null;
         else {
@@ -91,9 +85,7 @@ public class SaleManager implements SaleService {
 
     @Override
     public void endSaleRequest(EndSaleRequest endSaleRequest) {
-
         Optional<Sale> sale = saleRepository.findSalesByDeskIdAndIsSaleNotEnded(endSaleRequest.getDeskId());
-
         if(!sale.get().getSaleProducts().isEmpty()){
             for(SaleProduct saleProduct : sale.get().getSaleProducts()){
                 //update product stock count
@@ -103,17 +95,14 @@ public class SaleManager implements SaleService {
             }
         }
 
-
         sale.get().setTotalAmount(endSaleRequest.getTotalAmount());
         sale.get().setEndDate(endSaleRequest.getEndDate().toLocalDateTime());
         sale.get().setTotalGameAmount(endSaleRequest.getTotalGameAmount());
         sale.get().setTotalProductAmount(endSaleRequest.getTotalProductAmount());
         sale.get().setIsSaleEnded(endSaleRequest.getIsSaleEnded());
-
         Duration duration = Duration.between(sale.get().getStartDate(), sale.get().getEndDate());
         long minutesDifference = duration.toMinutes();
         sale.get().setTotalMinutes(minutesDifference);
-
         saleRepository.save(sale.get());
 
     }
@@ -121,11 +110,8 @@ public class SaleManager implements SaleService {
     @Override
     public void update(UpdateSaleRequest updateSaleRequest) {
         var saleEntity = saleRepository.findSalesByDeskIdAndIsSaleNotEnded(updateSaleRequest.getDeskId());
-
         Optional<Desk> desk = deskRepository.findById(updateSaleRequest.getDeskId());
-
         Sale sale = new Sale();
-
         for (CreatSaleProductRequest createSaleProduct : updateSaleRequest.getSaleProducts()) {
             SaleProduct saleProduct = new SaleProduct();
             saleProduct.setProductId(createSaleProduct.getProductId());
@@ -136,7 +122,6 @@ public class SaleManager implements SaleService {
             saleProduct.setNameOfSeller(createSaleProduct.getNameOfSeller());
             sale.getSaleProducts().add(saleProduct);
         }
-
         sale.setStartDate(saleEntity.get().getStartDate());
         sale.setUpdatedAt(updateSaleRequest.getStartDate().toLocalDateTime());
         sale.setHour(updateSaleRequest.getHour());
@@ -150,7 +135,6 @@ public class SaleManager implements SaleService {
         for (SaleProduct product : sale.getSaleProducts()) {
             product.setSale(sale);
         }
-
         saleRepository.deleteById(saleEntity.get().getId());
         saleRepository.save(sale);
     }
@@ -163,7 +147,6 @@ public class SaleManager implements SaleService {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
             Date fromDate = dateFormat.parse(fromDateStr);
             Date toDate = dateFormat.parse(toDateStr);
-
             var toDateSales = saleRepository.findSalesToDate(fromDate);
             var toDateDailyExpenses = dailyExpenseRepository.findDailyExpensesToDate(fromDate);
             Double totalCheckoutAmount = 0.0;

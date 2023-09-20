@@ -17,7 +17,6 @@ import java.util.Set;
 @Table(name = "expenses")
 public class Expense extends BaseEntity {
     private String name;
-
     @OneToMany(mappedBy = "expense", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<DailyExpense> dailyExpenses;
 }

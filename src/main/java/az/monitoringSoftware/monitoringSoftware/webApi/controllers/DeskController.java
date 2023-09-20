@@ -1,7 +1,7 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
 
-import az.monitoringSoftware.monitoringSoftware.business.concretes.DeskManager;
+import az.monitoringSoftware.monitoringSoftware.business.service.DeskManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.CreateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskByIdRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskLastUsingStatus;
@@ -23,18 +23,16 @@ import java.util.UUID;
 public class DeskController {
     public final DeskManager deskManager;
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid CreateDeskRequest createDeskRequest) throws BusinessException {
         deskManager.add(createDeskRequest);
     }
 
-
     @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.OK)
     public List<GetAllDeskResponse> getAll() {
         return deskManager.getAll();
-
     }
 
     @DeleteMapping("/delete/{id}")
@@ -49,7 +47,7 @@ public class DeskController {
         return ResponseEntity.ok(deskManager.getById(UUID.fromString(id)));
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody @Valid UpdateDeskRequest updateDeskRequest) {
         deskManager.update(updateDeskRequest);
@@ -59,7 +57,5 @@ public class DeskController {
     public void update(@RequestBody @Valid UpdateDeskLastUsingStatus updateDeskLastUsingStatus) {
         deskManager.updateLastUsingStatus(updateDeskLastUsingStatus);
     }
-
-
 
 }

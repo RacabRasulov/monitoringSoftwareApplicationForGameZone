@@ -1,11 +1,10 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
-import az.monitoringSoftware.monitoringSoftware.business.concretes.DailyExpenseManager;
+import az.monitoringSoftware.monitoringSoftware.business.service.DailyExpenseManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.CreateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.GetDailyExpensesByDatesInterval;
 import az.monitoringSoftware.monitoringSoftware.business.requests.dailyExpense.UpdateDailyExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.dailyExpense.GetAllDailyExpenseResponse;
-import az.monitoringSoftware.monitoringSoftware.business.responses.sale.GetAllSalesByDatesInterval;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ import java.util.UUID;
 public class DailyExpenseController {
     public final DailyExpenseManager dailyExpenseManager;
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid CreateDailyExpenseRequest createDailyExpenseRequest) {
         dailyExpenseManager.add(createDailyExpenseRequest);
@@ -33,14 +32,13 @@ public class DailyExpenseController {
         dailyExpenseManager.delete(id);
     }
 
-
     @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.OK)
     public List<GetAllDailyExpenseResponse> getAll() {
         return dailyExpenseManager.getAll();
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody UpdateDailyExpenseRequest updateDailyExpenseRequest) {
         dailyExpenseManager.update(updateDailyExpenseRequest);

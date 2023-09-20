@@ -11,16 +11,9 @@ import java.util.UUID;
 
 public interface ProductService {
     void add(CreateProductRequest createProductRequest) throws BusinessException;
-
     List<GetAllProductResponse> getAll();
-
-
     void delete(UUID id);
-
-
     void update(UpdateProductRequest updateProductRequest);
-
     GetProductByIdRequest getById(UUID id);
-
     List<GetAllProductResponse> getAllWithStock();
 }

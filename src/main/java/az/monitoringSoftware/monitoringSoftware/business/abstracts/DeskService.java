@@ -13,15 +13,9 @@ import java.util.UUID;
 public interface DeskService {
 
     void add(CreateDeskRequest createDeskRequest) throws BusinessException;
-
     List<GetAllDeskResponse> getAll();
-
     void delete(UUID id);
-
     GetDeskByIdRequest getById(UUID id);
-
     void update(UpdateDeskRequest updateDeskRequest);
-
-
     void updateLastUsingStatus(UpdateDeskLastUsingStatus updateDeskLastUsingStatus);
 }

@@ -13,9 +13,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class GetAllEmployeeResponse {
-
     private String name;
-
     private String surname;
     private UUID id;
     private String contactNumber;

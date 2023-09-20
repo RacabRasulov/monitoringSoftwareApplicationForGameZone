@@ -12,13 +12,8 @@ import java.util.UUID;
 public interface DeviceService {
 
     void add(CreatDeviceRequest creatDeviceRequest) throws BusinessException;
-
     List<GetAllDeviceResponse> getAll();
-
     void delete(UUID id);
-
     void update(UpdateDeviceRequest updateDeviceRequest);
-
-
     GetDeviceByIdRequest getById(UUID id);
 }

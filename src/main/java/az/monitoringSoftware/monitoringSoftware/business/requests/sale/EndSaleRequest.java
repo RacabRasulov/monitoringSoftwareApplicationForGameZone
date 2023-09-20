@@ -11,12 +11,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class EndSaleRequest {
-
     private UUID deskId;
     private Double totalProductAmount;
     private Double totalGameAmount;
     private Double totalAmount;
     private Boolean isSaleEnded;
     private Timestamp endDate;
-
 }

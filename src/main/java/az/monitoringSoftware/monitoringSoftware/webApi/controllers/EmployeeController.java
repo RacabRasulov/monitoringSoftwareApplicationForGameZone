@@ -1,6 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
-import az.monitoringSoftware.monitoringSoftware.business.concretes.EmployeeManager;
+import az.monitoringSoftware.monitoringSoftware.business.service.EmployeeManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.CreatEmployeeRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeRequest;
@@ -21,19 +21,17 @@ import java.util.UUID;
 public class EmployeeController {
     public final EmployeeManager employeeManager;
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid CreatEmployeeRequest creatEmployeeRequest) throws BusinessException {
 
         employeeManager.add(creatEmployeeRequest);
     }
-
     @GetMapping("/getAll")
     @ResponseStatus(HttpStatus.OK)
     public List<GetAllEmployeeResponse> getAll() {
         return employeeManager.getAll();
     }
-
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -47,10 +45,9 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeManager.getById(UUID.fromString(id)));
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
         employeeManager.update(updateEmployeeRequest);
     }
-
 }

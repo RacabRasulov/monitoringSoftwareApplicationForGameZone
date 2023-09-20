@@ -1,6 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.webApi.controllers;
 
-import az.monitoringSoftware.monitoringSoftware.business.concretes.ExpenseManager;
+import az.monitoringSoftware.monitoringSoftware.business.service.ExpenseManager;
 import az.monitoringSoftware.monitoringSoftware.business.requests.expense.CreatExpenseRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.expense.GetExpenseByNameRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.expense.UpdateExpenseRequest;
@@ -20,7 +20,7 @@ import java.util.UUID;
 public class ExpenseController {
     public final ExpenseManager expenseManager;
 
-    @PostMapping("/add")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void add(@RequestBody @Valid CreatExpenseRequest creatExpenseRequest) {
         expenseManager.add(creatExpenseRequest);
@@ -45,14 +45,11 @@ public class ExpenseController {
         return expenseManager.getAll();
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody UpdateExpenseRequest updateExpenseRequest){
         expenseManager.update(updateExpenseRequest);
     }
-
-
-
 }
 
 
