@@ -5,7 +5,7 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.employee.Creat
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.GetEmployeeByIdRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.employee.UpdateEmployeeRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.employe.GetAllEmployeeResponse;
-import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
+import az.monitoringSoftware.monitoringSoftware.core.utilities.exception.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

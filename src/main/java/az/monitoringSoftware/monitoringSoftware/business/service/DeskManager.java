@@ -6,7 +6,7 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskBy
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskLastUsingStatus;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDeskResponse;
-import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
+import az.monitoringSoftware.monitoringSoftware.core.utilities.exception.BusinessException;
 import az.monitoringSoftware.monitoringSoftware.business.rules.DeskBusinessRules;
 import az.monitoringSoftware.monitoringSoftware.core.utilities.mappers.ModelMapperManager;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeskRepository;

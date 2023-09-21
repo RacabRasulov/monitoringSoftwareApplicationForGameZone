@@ -7,7 +7,7 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.desk.GetDeskBy
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskLastUsingStatus;
 import az.monitoringSoftware.monitoringSoftware.business.requests.desk.UpdateDeskRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.desk.GetAllDeskResponse;
-import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
+import az.monitoringSoftware.monitoringSoftware.core.utilities.exception.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

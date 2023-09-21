@@ -1,5 +1,6 @@
 package az.monitoringSoftware.monitoringSoftware.business.rules;
 
+import az.monitoringSoftware.monitoringSoftware.core.utilities.exception.BusinessException;
 import az.monitoringSoftware.monitoringSoftware.dataAccess.abstracts.DeviceRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

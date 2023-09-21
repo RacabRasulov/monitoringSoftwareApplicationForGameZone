@@ -5,7 +5,7 @@ import az.monitoringSoftware.monitoringSoftware.business.requests.device.CreatDe
 import az.monitoringSoftware.monitoringSoftware.business.requests.device.GetDeviceByIdRequest;
 import az.monitoringSoftware.monitoringSoftware.business.requests.device.UpdateDeviceRequest;
 import az.monitoringSoftware.monitoringSoftware.business.responses.devices.GetAllDeviceResponse;
-import az.monitoringSoftware.monitoringSoftware.business.rules.BusinessException;
+import az.monitoringSoftware.monitoringSoftware.core.utilities.exception.BusinessException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
